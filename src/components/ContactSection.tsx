@@ -55,7 +55,14 @@ const ContactSection = () => {
           className="text-center mb-14"
         >
           <span className="overline">Contacto</span>
-          <h2 className="text-[2rem] font-bold text-white mt-3">Hablemos</h2>
+          <h2 className="text-[2rem] font-bold text-white mt-3">
+            Fortalezcamos juntos la seguridad y continuidad de tu operación
+          </h2>
+          <p className="mt-4 max-w-3xl mx-auto text-sm md:text-base text-gray-400" style={{ lineHeight: 1.8 }}>
+            Ya sea que busques optimizar tu infraestructura, fortalecer tu estrategia de ciberseguridad, cumplir
+            requerimientos regulatorios o incorporar capacidades especializadas, nuestro equipo puede ayudarte a
+            identificar oportunidades de mejora alineadas a los objetivos de tu negocio.
+          </p>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 max-w-5xl mx-auto">
