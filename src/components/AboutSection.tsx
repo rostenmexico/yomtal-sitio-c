@@ -7,11 +7,11 @@ import { RenderPass } from "three/addons/postprocessing/RenderPass.js";
 import { UnrealBloomPass } from "three/addons/postprocessing/UnrealBloomPass.js";
 
 const benefits = [
-  "Disminuimos riesgos operativos.",
-  "Mejoramos la disponibilidad de sus operaciones.",
-  "Disminuimos los costos de operación y administración de seguridad y riesgos.",
-  "Cumplimos la estrategia de la organización balanceando costo/beneficio.",
-  "Aumentamos la productividad del negocio mediante tecnología alineada a objetivos.",
+  "Reducimos riesgos operativos y de ciberseguridad.",
+  "Garantizamos la continuidad de servicios y operaciones críticas.",
+  "Optimizamos costos de infraestructura, soporte y seguridad.",
+  "Alineamos las soluciones tecnológicas a los objetivos del negocio.",
+  "Acompañamos a nuestros clientes desde la evaluación inicial hasta la operación continua.",
 ];
 
 // Servicios flotando alrededor del icosaedro
