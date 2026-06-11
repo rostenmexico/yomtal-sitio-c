@@ -351,12 +351,13 @@ const AboutSection = () => (
         >
           <span className="overline">Quiénes somos</span>
           <h2 className="text-[2.2rem] font-bold text-white mt-3 leading-tight">
-            Una organización enfocada en brindar soluciones de TI que apoyan las estrategias de negocio
+            Reducimos riesgos y fortalecemos la continuidad operativa de tu organización
           </h2>
           <p className="mt-6 text-gray-400" style={{ lineHeight: 1.8 }}>
-            Desde 2012, YOMTAL es una organización enfocada en brindar soluciones de TI que apoyan las estrategias de
-            negocio de sus clientes. Su enfoque consultivo busca soluciones que aporten un mejor costo total de
-            propiedad durante todo el ciclo de uso de la tecnología.
+            En YOMTAL ayudamos a las organizaciones a reducir riesgos y garantizar la continuidad operativa mediante
+            infraestructura tecnológica y ciberseguridad especializada alineadas a sus objetivos de negocio. Fundada en
+            2012, YOMTAL está conformada por especialistas con más de dos décadas de experiencia en ciberseguridad,
+            infraestructura de redes y protección de entornos corporativos críticos.
           </p>
           <div className="mt-8 space-y-4">
             {benefits.map((b, i) => (
