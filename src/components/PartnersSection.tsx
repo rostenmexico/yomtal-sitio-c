@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-const partners = ["Checkpoint", "Cisco", "A10", "Exabeam/LoghRythm", "Picus", "Digicert", "NordPass/NordStellar"];
+const partners = ["Check Point", "Cisco", "A10", "Exabeam / LogRhythm", "Picus", "DigiCert", "NordPass / NordStellar"];
 
 const PartnersSection = () => (
   <section id="socios" className="relative z-10 bg-[#0f1117]/95 backdrop-blur-sm section-padding">
@@ -11,14 +11,21 @@ const PartnersSection = () => (
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        <h2 className="text-[1.4rem] font-bold text-white">Socios tecnológicos</h2>
-        <p className="mt-3 text-sm text-gray-400 max-w-[560px] mx-auto leading-relaxed">
-          Trabajamos con fabricantes y soluciones que fortalecen la estrategia tecnológica, la seguridad y la
-          continuidad operativa de nuestros clientes.
+        <span className="overline">Ecosistema tecnológico</span>
+
+        <h2 className="text-[1.4rem] md:text-[1.8rem] font-bold text-white mt-3">
+          Certificados por Líderes Globales en Tecnología
+        </h2>
+
+        <p className="mt-4 text-sm md:text-base text-gray-400 max-w-[760px] mx-auto leading-relaxed">
+          Trabajamos con fabricantes líderes en infraestructura, ciberseguridad y continuidad operativa para ofrecer
+          soluciones confiables, escalables y alineadas a las necesidades de nuestros clientes. Nuestras certificaciones
+          y alianzas estratégicas respaldan la capacidad de YOMTAL para diseñar, implementar y soportar tecnologías
+          críticas para el negocio.
         </p>
       </motion.div>
 
-      <div className="flex flex-wrap justify-center gap-12 mt-12">
+      <div className="flex flex-wrap justify-center gap-x-12 gap-y-8 mt-12">
         {partners.map((name, i) => (
           <motion.div
             key={name}
