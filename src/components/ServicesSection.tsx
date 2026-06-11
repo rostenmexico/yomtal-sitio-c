@@ -70,8 +70,8 @@ const services = [
     ),
   },
   {
-    title: "Revisión y auditoría",
-    desc: "Análisis de riesgos, compliance y recomendaciones estratégicas que te permiten tomar decisiones informadas sobre tu infraestructura de TI.",
+    title: "Servicios Administrados de TI y Ciberseguridad",
+    desc: "Maximizamos la disponibilidad, seguridad y rendimiento de tu infraestructura mediante servicios administrados, monitoreo continuo y soporte especializado.",
     icon: (
       <svg
         width="40"
@@ -90,8 +90,8 @@ const services = [
     ),
   },
   {
-    title: "Servicios Administrados",
-    desc: "Gestión administrada de red para asegurar continuidad y productividad mediante acuerdos de nivel de servicio, personal especializado, disponibilidad y reducción de costos.",
+    title: "Soporte e Implementación Regional sin Fronteras",
+    desc: "Brindamos soporte especializado e implementación de proyectos para infraestructura de redes y ciberseguridad en México, Estados Unidos y Latinoamérica.",
     icon: (
       <svg
         width="40"
@@ -112,8 +112,8 @@ const services = [
     ),
   },
   {
-    title: "Soporte sin Fronteras",
-    desc: "Soporte remoto y asistencia en sitio para redes de oficinas en distintas regiones, con ingenieros certificados, punto único de contacto y disponibilidad 24/7/365.",
+    title: "Continuidad Operativa y Resiliencia Tecnológica",
+    desc: "Diseñamos estrategias para mantener servicios críticos disponibles, reducir interrupciones y fortalecer la capacidad de recuperación ante incidentes, fallas o desastres.",
     icon: (
       <svg
         width="40"
