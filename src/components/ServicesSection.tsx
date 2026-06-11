@@ -63,10 +63,19 @@ const services = [
       </svg>
     ),
   },
-  {
-    title: "Auditoría, Riesgo y Cumplimiento Normativo",
-    desc: "Ayudamos a identificar riesgos, fortalecer controles de seguridad y cumplir regulaciones mediante auditorías, análisis de vulnerabilidades y estrategias alineadas al negocio.",
-    icon: (
+{
+  title: "Auditoría, Riesgo y Cumplimiento Normativo",
+  desc: "Ayudamos a identificar riesgos, fortalecer controles de seguridad y cumplir regulaciones mediante auditorías, análisis de vulnerabilidades y estrategias alineadas al negocio.",
+  items: [
+    "Diagnóstico integral de seguridad",
+    "Hackeo ético y pruebas de penetración",
+    "Gestión de seguridad basada en ISO 27001",
+    "Continuidad del negocio y recuperación ante desastres",
+    "Protección de datos personales y privacidad",
+    "Cumplimiento normativo y gestión de riesgos",
+    "Capacitación y concientización en ciberseguridad",
+  ],
+  icon: (
       <svg
         width="40"
         height="40"
