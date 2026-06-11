@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 const services = [
   {
     title: "Seguridad de TI",
-    desc: "Evaluación de vulnerabilidades, políticas de acceso, protección perimetral y gestión integral de riesgos para resguardar los activos digitales de tu organización.",
+    desc: "Protegemos la infraestructura tecnológica de tu empresa mediante soluciones avanzadas de ciberseguridad que previenen, detectan y responden a amenazas en tiempo real.",
     icon: (
       <svg
         width="40"
@@ -23,8 +23,8 @@ const services = [
     ),
   },
   {
-    title: "Arquitectura de redes",
-    desc: "Diseño, segmentación, redundancia y escalabilidad. Construimos la base de red que permite a tu operación crecer con seguridad y rendimiento.",
+    title: "Redes de Alto Rendimiento y Continuidad Operativa",
+    desc: "Diseñamos e implementamos infraestructuras de red modernas, seguras y altamente disponibles que optimizan el rendimiento, la escalabilidad y la continuidad de los servicios críticos.",
     icon: (
       <svg
         width="40"
@@ -46,8 +46,8 @@ const services = [
     ),
   },
   {
-    title: "Balanceo y aceleración",
-    desc: "Disponibilidad, rendimiento y distribución de carga para tus aplicaciones críticas, garantizando continuidad operativa y experiencia óptima.",
+    title: "Auditoría, Riesgo y Cumplimiento Normativo",
+    desc: "Ayudamos a identificar riesgos, fortalecer controles de seguridad y cumplir regulaciones mediante auditorías, análisis de vulnerabilidades y estrategias alineadas al negocio.",
     icon: (
       <svg
         width="40"
