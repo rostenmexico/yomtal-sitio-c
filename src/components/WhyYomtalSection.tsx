@@ -1,9 +1,10 @@
 import { motion } from "framer-motion";
 
-const blocks = [
+const reasons = [
   {
     num: "01",
-    title: "Preventa",
+    title: "Experiencia comprobada",
+    desc: "Más de una década acompañando proyectos de infraestructura tecnológica y ciberseguridad para entornos empresariales.",
     icon: (
       <svg
         width="32"
@@ -15,19 +16,18 @@ const blocks = [
         strokeLinecap="round"
         strokeLinejoin="round"
       >
-        <circle cx="14" cy="14" r="9" />
-        <line x1="20.5" y1="20.5" x2="28" y2="28" />
+        <path d="M6 26V8a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v18" />
+        <path d="M4 26h24" />
+        <path d="M11 12h10" />
+        <path d="M11 17h10" />
+        <path d="M11 22h6" />
       </svg>
     ),
-    items: [
-      "Ofrecemos al menos 2 alternativas que cumplan los requerimientos de nuestros clientes.",
-      "Hacemos la evaluación costo/beneficio antes de emitir recomendaciones.",
-      "Clasificamos los requerimientos del cliente para evaluar el costo/beneficio de la solución.",
-    ],
   },
   {
     num: "02",
-    title: "Implementación",
+    title: "Especialistas certificados",
+    desc: "Contamos con ingenieros certificados y especialistas con amplia experiencia en redes, seguridad e infraestructura crítica.",
     icon: (
       <svg
         width="32"
@@ -39,19 +39,15 @@ const blocks = [
         strokeLinecap="round"
         strokeLinejoin="round"
       >
-        <circle cx="16" cy="16" r="6" />
-        <path d="M16 4v4M16 24v4M4 16h4M24 16h4M7.5 7.5l2.8 2.8M21.7 21.7l2.8 2.8M7.5 24.5l2.8-2.8M21.7 10.3l2.8-2.8" />
+        <circle cx="16" cy="11" r="6" />
+        <path d="M11 17l-2 10 7-4 7 4-2-10" />
       </svg>
     ),
-    items: [
-      "Ofrecemos autonomía a los clientes con las soluciones que entregamos.",
-      "Todas las etapas de implementación incluyen transferencia de conocimientos.",
-      "Buscamos que el cliente aproveche al máximo la solución implementada.",
-    ],
   },
   {
     num: "03",
-    title: "Soporte",
+    title: "Cobertura regional",
+    desc: "Brindamos soporte e implementación para operaciones en México, Estados Unidos y Latinoamérica bajo un solo punto de contacto.",
     icon: (
       <svg
         width="32"
@@ -63,15 +59,77 @@ const blocks = [
         strokeLinecap="round"
         strokeLinejoin="round"
       >
-        <path d="M5 18v-4a11 11 0 0 1 22 0v4" />
-        <path d="M5 18a3 3 0 0 0-3 3v1a3 3 0 0 0 3 3h1v-7H5zM27 18a3 3 0 0 1 3 3v1a3 3 0 0 1-3 3h-1v-7h1z" />
+        <circle cx="16" cy="16" r="12" />
+        <path d="M4 16h24" />
+        <path d="M16 4c4 4 6 8 6 12s-2 8-6 12" />
+        <path d="M16 4c-4 4-6 8-6 12s2 8 6 12" />
       </svg>
     ),
-    items: [
-      "Actualizamos los conocimientos de los administradores de nuestras soluciones.",
-      "Brindamos soluciones con bajo costo de propiedad para nuestros clientes.",
-      "Acompañamos la operación, mejora y evolución de las soluciones implementadas.",
-    ],
+  },
+  {
+    num: "04",
+    title: "Enfoque consultivo",
+    desc: "Diseñamos soluciones alineadas a los objetivos del negocio, priorizando continuidad, reducción de riesgos y generación de valor.",
+    icon: (
+      <svg
+        width="32"
+        height="32"
+        viewBox="0 0 32 32"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <circle cx="14" cy="14" r="8" />
+        <path d="M20 20l7 7" />
+        <path d="M10 14l3 3 6-6" />
+      </svg>
+    ),
+  },
+  {
+    num: "05",
+    title: "Capacidad integral",
+    desc: "Diseñamos, implementamos, administramos y soportamos soluciones tecnológicas de misión crítica durante todo su ciclo de vida.",
+    icon: (
+      <svg
+        width="32"
+        height="32"
+        viewBox="0 0 32 32"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M16 4l10 6v12l-10 6-10-6V10l10-6z" />
+        <path d="M16 16l10-6" />
+        <path d="M16 16v12" />
+        <path d="M16 16L6 10" />
+      </svg>
+    ),
+  },
+  {
+    num: "06",
+    title: "Compromiso a largo plazo",
+    desc: "Acompañamos la operación, mejora y evolución de las soluciones implementadas para fortalecer la continuidad operativa.",
+    icon: (
+      <svg
+        width="32"
+        height="32"
+        viewBox="0 0 32 32"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M6 16a10 10 0 0 1 17-7" />
+        <path d="M23 9V4h5" />
+        <path d="M26 16a10 10 0 0 1-17 7" />
+        <path d="M9 23v5H4" />
+      </svg>
+    ),
   },
 ];
 
@@ -85,31 +143,31 @@ const WhyYomtalSection = () => (
         transition={{ duration: 0.6 }}
         className="text-center mb-14"
       >
-        <h2 className="text-[2rem] font-bold text-white">¿Por qué YOMTAL?</h2>
-        <div className="mx-auto mt-3 w-10 h-[3px] bg-yomtal-orange rounded-full" />
+        <span className="overline">Por qué elegirnos</span>
+        <h2 className="text-[2rem] font-bold text-white mt-3">¿Por qué YOMTAL?</h2>
+        <p className="mt-4 max-w-3xl mx-auto text-sm md:text-base text-gray-400" style={{ lineHeight: 1.8 }}>
+          Combinamos experiencia, especialización técnica y enfoque consultivo para ayudar a las organizaciones a
+          reducir riesgos, fortalecer su infraestructura y mantener la continuidad de sus operaciones críticas.
+        </p>
+        <div className="mx-auto mt-5 w-10 h-[3px] bg-yomtal-orange rounded-full" />
       </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {blocks.map((b, i) => (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {reasons.map((reason, i) => (
           <motion.div
-            key={i}
+            key={reason.num}
             initial={{ opacity: 0, y: 32 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
-            transition={{ delay: i * 0.12, duration: 0.6 }}
-            className="bg-[#1a1c2e]/80 p-9 rounded-2xl border border-white/10 hover:border-yomtal-orange/60 transition-all duration-250 hover:-translate-y-1 group"
+            transition={{ delay: i * 0.08, duration: 0.6 }}
+            className="bg-[#1a1c2e]/80 p-8 rounded-2xl border border-white/10 hover:border-yomtal-orange/60 transition-all duration-250 hover:-translate-y-1 group"
           >
-            <span className="text-[13px] font-bold tracking-widest text-yomtal-orange">{b.num}</span>
-            <div className="text-yomtal-orange mt-4 mb-3">{b.icon}</div>
-            <h3 className="text-lg font-bold text-white mb-4">{b.title}</h3>
-            <ul className="space-y-2.5">
-              {b.items.map((item, j) => (
-                <li key={j} className="text-sm text-gray-400 flex items-start gap-2">
-                  <span className="w-1 h-1 rounded-full bg-yomtal-orange mt-2 flex-shrink-0" />
-                  {item}
-                </li>
-              ))}
-            </ul>
+            <span className="text-[13px] font-bold tracking-widest text-yomtal-orange">{reason.num}</span>
+            <div className="text-yomtal-orange mt-4 mb-3">{reason.icon}</div>
+            <h3 className="text-lg font-bold text-white mb-3">{reason.title}</h3>
+            <p className="text-sm text-gray-400" style={{ lineHeight: 1.7 }}>
+              {reason.desc}
+            </p>
           </motion.div>
         ))}
       </div>
