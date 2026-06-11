@@ -3,18 +3,17 @@ import { motion } from "framer-motion";
 
 const services = [
   {
-    {
-  title: "Seguridad de TI",
-  desc: "Protegemos la infraestructura tecnológica de tu empresa mediante soluciones avanzadas de ciberseguridad que previenen, detectan y responden a amenazas en tiempo real.",
-  items: [
-    "Firewall Next-Generation",
-    "Prevención de Intrusiones IPS en tiempo real",
-    "Protección avanzada de correo electrónico",
-    "SIEM y correlación de eventos con IA",
-    "Gestión continua de exposición a amenazas CTEM",
-    "Validación continua de seguridad y prevención de fuga de datos",
-  ],
-  icon: (
+    title: "Seguridad de TI",
+    desc: "Protegemos la infraestructura tecnológica de tu empresa mediante soluciones avanzadas de ciberseguridad que previenen, detectan y responden a amenazas en tiempo real.",
+    items: [
+      "Firewall Next-Generation",
+      "Prevención de Intrusiones IPS en tiempo real",
+      "Protección avanzada de correo electrónico",
+      "SIEM y correlación de eventos con IA",
+      "Gestión continua de exposición a amenazas CTEM",
+      "Validación continua de seguridad y prevención de fuga de datos",
+    ],
+    icon: (
       <svg
         width="40"
         height="40"
@@ -27,22 +26,21 @@ const services = [
       >
         <path d="M20 4L6 10v9c0 9 6.3 16.8 14 18.7C27.7 35.8 34 28 34 19V10L20 4z" />
         <rect x="16" y="18" width="8" height="6" rx="1" />
-        <path d="M20 18v-3a3 3 0 0 1 3-3h0a3 3 0 0 1 3 3v3" />
+        <path d="M20 18v-3a4 4 0 0 1 8 0v3" />
       </svg>
     ),
   },
   {
-  title: "Redes de Alto Rendimiento y Continuidad Operativa",
-  desc: "Diseñamos e implementamos infraestructuras de red modernas, seguras y altamente disponibles que optimizan el rendimiento, la escalabilidad y la continuidad de los servicios críticos.",
-  items: [
-    "Arquitectura de redes empresariales",
-    "SD-WAN y optimización WAN",
-    "Switching empresarial de alta disponibilidad",
-    "Balanceo de carga para aplicaciones y centros de datos",
-    "Gestión centralizada de DNS, DHCP e IP",
-    "Diseño de redes tolerantes a fallos",
-  ],
-  icon: (
+    title: "Redes de Alto Rendimiento y Continuidad Operativa",
+    desc: "Diseñamos e implementamos infraestructuras de red modernas, seguras y altamente disponibles que optimizan el rendimiento, la escalabilidad y la continuidad de los servicios críticos.",
+    items: [
+      "Arquitectura de redes empresariales",
+      "SD-WAN y optimización WAN",
+      "Switching empresarial de alta disponibilidad",
+      "Balanceo de carga para aplicaciones y centros de datos",
+      "Gestión centralizada de DNS, DHCP e IP",
+      "Diseño de redes tolerantes a fallos",
+    ],
     icon: (
       <svg
         width="40"
@@ -63,51 +61,19 @@ const services = [
       </svg>
     ),
   },
-{
-  title: "Auditoría, Riesgo y Cumplimiento Normativo",
-  desc: "Ayudamos a identificar riesgos, fortalecer controles de seguridad y cumplir regulaciones mediante auditorías, análisis de vulnerabilidades y estrategias alineadas al negocio.",
-  items: [
-    "Diagnóstico integral de seguridad",
-    "Hackeo ético y pruebas de penetración",
-    "Gestión de seguridad basada en ISO 27001",
-    "Continuidad del negocio y recuperación ante desastres",
-    "Protección de datos personales y privacidad",
-    "Cumplimiento normativo y gestión de riesgos",
-    "Capacitación y concientización en ciberseguridad",
-  ],
-  icon: (
-      <svg
-        width="40"
-        height="40"
-        viewBox="0 0 40 40"
-        fill="none"
-        stroke="#F7B017"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <line x1="20" y1="6" x2="20" y2="16" />
-        <line x1="10" y1="16" x2="30" y2="16" />
-        <line x1="10" y1="16" x2="7" y2="28" />
-        <line x1="30" y1="16" x2="33" y2="28" />
-        <circle cx="7" cy="30" r="3" />
-        <circle cx="33" cy="30" r="3" />
-        <circle cx="20" cy="5" r="2.5" />
-      </svg>
-    ),
-  },
   {
-  title: "Servicios Administrados de TI y Ciberseguridad",
-  desc: "Maximizamos la disponibilidad, seguridad y rendimiento de tu infraestructura mediante servicios administrados, monitoreo continuo y soporte especializado.",
-  items: [
-    "Soporte administrado de infraestructura de redes y seguridad",
-    "Servicios administrados de ciberseguridad MSSP",
-    "Auditorías de infraestructura y seguridad",
-    "Diseño e implementación de controles de TI",
-    "Transferencia de conocimiento y capacitación",
-    "Optimización de recursos para enfocarte en el crecimiento del negocio",
-  ],
-  icon: (
+    title: "Auditoría, Riesgo y Cumplimiento Normativo",
+    desc: "Ayudamos a identificar riesgos, fortalecer controles de seguridad y cumplir regulaciones mediante auditorías, análisis de vulnerabilidades y estrategias alineadas al negocio.",
+    items: [
+      "Diagnóstico integral de seguridad",
+      "Hackeo ético y pruebas de penetración",
+      "Gestión de seguridad basada en ISO 27001",
+      "Continuidad del negocio y recuperación ante desastres",
+      "Protección de datos personales y privacidad",
+      "Cumplimiento normativo y gestión de riesgos",
+      "Capacitación y concientización en ciberseguridad",
+    ],
+    icon: (
       <svg
         width="40"
         height="40"
@@ -125,17 +91,17 @@ const services = [
     ),
   },
   {
-  title: "Soporte e Implementación Regional sin Fronteras",
-  desc: "Brindamos soporte especializado e implementación de proyectos para infraestructura de redes y ciberseguridad en México, Estados Unidos y Latinoamérica.",
-  items: [
-    "Cobertura regional para México, Estados Unidos y LATAM",
-    "Implementaciones y proyectos multipaís",
-    "Soporte remoto y asistencia en sitio",
-    "Atención técnica en español e inglés",
-    "Equipo de ingenieros especializados",
-    "Continuidad operativa durante todo el ciclo de vida de la solución",
-  ],
-  icon: (
+    title: "Servicios Administrados de TI y Ciberseguridad",
+    desc: "Maximizamos la disponibilidad, seguridad y rendimiento de tu infraestructura mediante servicios administrados, monitoreo continuo y soporte especializado.",
+    items: [
+      "Soporte administrado de infraestructura de redes y seguridad",
+      "Servicios administrados de ciberseguridad MSSP",
+      "Auditorías de infraestructura y seguridad",
+      "Diseño e implementación de controles de TI",
+      "Transferencia de conocimiento y capacitación",
+      "Optimización de recursos para enfocarte en el crecimiento del negocio",
+    ],
+    icon: (
       <svg
         width="40"
         height="40"
@@ -154,18 +120,18 @@ const services = [
       </svg>
     ),
   },
- {
-  title: "Continuidad Operativa y Resiliencia Tecnológica",
-  desc: "Diseñamos estrategias para mantener servicios críticos disponibles, reducir interrupciones y fortalecer la capacidad de recuperación ante incidentes, fallas o desastres.",
-  items: [
-    "Estrategias de continuidad operativa",
-    "Planes de recuperación ante desastres",
-    "Reducción de interrupciones en servicios críticos",
-    "Arquitecturas resilientes y tolerantes a fallos",
-    "Evaluación de riesgos operativos",
-    "Fortalecimiento de la disponibilidad tecnológica",
-  ],
-  icon: (
+  {
+    title: "Soporte e Implementación Regional sin Fronteras",
+    desc: "Brindamos soporte especializado e implementación de proyectos para infraestructura de redes y ciberseguridad en México, Estados Unidos y Latinoamérica.",
+    items: [
+      "Cobertura regional para México, Estados Unidos y LATAM",
+      "Implementaciones y proyectos multipaís",
+      "Soporte remoto y asistencia en sitio",
+      "Atención técnica en español e inglés",
+      "Equipo de ingenieros especializados",
+      "Continuidad operativa durante todo el ciclo de vida de la solución",
+    ],
+    icon: (
       <svg
         width="40"
         height="40"
@@ -180,7 +146,38 @@ const services = [
         <path d="M6 20h28" />
         <path d="M20 6c4 4 6 8.5 6 14s-2 10-6 14" />
         <path d="M20 6c-4 4-6 8.5-6 14s2 10 6 14" />
-        <path d="M27 27l5 5" />
+      </svg>
+    ),
+  },
+  {
+    title: "Continuidad Operativa y Resiliencia Tecnológica",
+    desc: "Diseñamos estrategias para mantener servicios críticos disponibles, reducir interrupciones y fortalecer la capacidad de recuperación ante incidentes, fallas o desastres.",
+    items: [
+      "Estrategias de continuidad operativa",
+      "Planes de recuperación ante desastres",
+      "Reducción de interrupciones en servicios críticos",
+      "Arquitecturas resilientes y tolerantes a fallos",
+      "Evaluación de riesgos operativos",
+      "Fortalecimiento de la disponibilidad tecnológica",
+    ],
+    icon: (
+      <svg
+        width="40"
+        height="40"
+        viewBox="0 0 40 40"
+        fill="none"
+        stroke="#F7B017"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <line x1="20" y1="6" x2="20" y2="16" />
+        <line x1="10" y1="16" x2="30" y2="16" />
+        <line x1="10" y1="16" x2="7" y2="28" />
+        <line x1="30" y1="16" x2="33" y2="28" />
+        <circle cx="7" cy="30" r="3" />
+        <circle cx="33" cy="30" r="3" />
+        <circle cx="20" cy="5" r="2.5" />
       </svg>
     ),
   },
