@@ -226,7 +226,7 @@ const ServiceCard = ({ service, index }: { service: (typeof services)[0]; index:
         <h3 className="text-lg font-bold mb-3" style={{ color: "#ffffff" }}>
           {service.title}
         </h3>
-        <p className="text-sm leading-relaxed" style={{ color: "#8a8a8a", lineHeight: 1.7 }}>
+        <p className="text-[13.5px] leading-relaxed" style={{ color: "#8a8a8a", lineHeight: 1.7 }}>
           {service.desc}
         </p>
 
