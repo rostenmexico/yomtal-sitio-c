@@ -97,9 +97,17 @@ const services = [
     ),
   },
   {
-    title: "Servicios Administrados de TI y Ciberseguridad",
-    desc: "Maximizamos la disponibilidad, seguridad y rendimiento de tu infraestructura mediante servicios administrados, monitoreo continuo y soporte especializado.",
-    icon: (
+  title: "Servicios Administrados de TI y Ciberseguridad",
+  desc: "Maximizamos la disponibilidad, seguridad y rendimiento de tu infraestructura mediante servicios administrados, monitoreo continuo y soporte especializado.",
+  items: [
+    "Soporte administrado de infraestructura de redes y seguridad",
+    "Servicios administrados de ciberseguridad MSSP",
+    "Auditorías de infraestructura y seguridad",
+    "Diseño e implementación de controles de TI",
+    "Transferencia de conocimiento y capacitación",
+    "Optimización de recursos para enfocarte en el crecimiento del negocio",
+  ],
+  icon: (
       <svg
         width="40"
         height="40"
