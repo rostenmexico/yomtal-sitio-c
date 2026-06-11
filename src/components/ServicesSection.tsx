@@ -32,8 +32,17 @@ const services = [
     ),
   },
   {
-    title: "Redes de Alto Rendimiento y Continuidad Operativa",
-    desc: "Diseñamos e implementamos infraestructuras de red modernas, seguras y altamente disponibles que optimizan el rendimiento, la escalabilidad y la continuidad de los servicios críticos.",
+  title: "Redes de Alto Rendimiento y Continuidad Operativa",
+  desc: "Diseñamos e implementamos infraestructuras de red modernas, seguras y altamente disponibles que optimizan el rendimiento, la escalabilidad y la continuidad de los servicios críticos.",
+  items: [
+    "Arquitectura de redes empresariales",
+    "SD-WAN y optimización WAN",
+    "Switching empresarial de alta disponibilidad",
+    "Balanceo de carga para aplicaciones y centros de datos",
+    "Gestión centralizada de DNS, DHCP e IP",
+    "Diseño de redes tolerantes a fallos",
+  ],
+  icon: (
     icon: (
       <svg
         width="40"
