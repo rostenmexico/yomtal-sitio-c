@@ -16,12 +16,12 @@ const benefits = [
 
 // Servicios flotando alrededor del icosaedro
 const services = [
-  { lines: ["Seguridad de TI"], theta: 20, elev: 0.75 },
-  { lines: ["Arquitectura", "de redes"], theta: 80, elev: -0.4 },
-  { lines: ["Balanceo y", "aceleración"], theta: 140, elev: 0.35 },
-  { lines: ["Revisión y", "auditoría"], theta: 200, elev: -0.65 },
-  { lines: ["Servicios", "Administrados"], theta: 260, elev: 0.5 },
-  { lines: ["Soporte sin", "Fronteras"], theta: 320, elev: -0.3 },
+  { lines: ["Seguridad", "de TI"], theta: 20, elev: 0.75 },
+  { lines: ["Redes de Alto", "Rendimiento"], theta: 80, elev: -0.4 },
+  { lines: ["Auditoría y", "Cumplimiento"], theta: 140, elev: 0.35 },
+  { lines: ["Servicios", "Administrados"], theta: 200, elev: -0.65 },
+  { lines: ["Soporte", "Regional"], theta: 260, elev: 0.5 },
+  { lines: ["Continuidad", "Operativa"], theta: 320, elev: -0.3 },
 ];
 
 // ============================================================
