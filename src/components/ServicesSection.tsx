@@ -125,9 +125,17 @@ const services = [
     ),
   },
   {
-    title: "Soporte e Implementación Regional sin Fronteras",
-    desc: "Brindamos soporte especializado e implementación de proyectos para infraestructura de redes y ciberseguridad en México, Estados Unidos y Latinoamérica.",
-    icon: (
+  title: "Soporte e Implementación Regional sin Fronteras",
+  desc: "Brindamos soporte especializado e implementación de proyectos para infraestructura de redes y ciberseguridad en México, Estados Unidos y Latinoamérica.",
+  items: [
+    "Cobertura regional para México, Estados Unidos y LATAM",
+    "Implementaciones y proyectos multipaís",
+    "Soporte remoto y asistencia en sitio",
+    "Atención técnica en español e inglés",
+    "Equipo de ingenieros especializados",
+    "Continuidad operativa durante todo el ciclo de vida de la solución",
+  ],
+  icon: (
       <svg
         width="40"
         height="40"
