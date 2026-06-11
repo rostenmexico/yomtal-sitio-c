@@ -43,8 +43,9 @@ const HeroSection = () => {
               className="mt-6 max-w-[480px]"
               style={{ fontSize: "17px", color: "#a0a0a0", lineHeight: 1.8 }}
             >
-              En YOMTAL diseñamos e integramos soluciones de seguridad, arquitectura de redes y optimización tecnológica
-              para fortalecer la continuidad, disponibilidad y protección de tu operación.
+              En YOMTAL diseñamos e integramos soluciones de ciberseguridad, arquitectura de redes e infraestructura
+              tecnológica que ayudan a las organizaciones a reducir riesgos, fortalecer su resiliencia y mantener la
+              disponibilidad de sus servicios críticos.
             </motion.p>
 
             <motion.div
