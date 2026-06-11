@@ -178,9 +178,20 @@ const ServiceCard = ({ service, index }: { service: (typeof services)[0]; index:
         <h3 className="text-lg font-bold mb-3" style={{ color: "#ffffff" }}>
           {service.title}
         </h3>
-        <p className="text-sm leading-relaxed flex-1" style={{ color: "#8a8a8a", lineHeight: 1.7 }}>
+        <p className="text-sm leading-relaxed" style={{ color: "#8a8a8a", lineHeight: 1.7 }}>
           {service.desc}
         </p>
+
+        {service.items && (
+          <ul className="mt-5 space-y-2 flex-1">
+            {service.items.map((item, itemIndex) => (
+              <li key={itemIndex} className="flex gap-2 text-sm" style={{ color: "#b8b8b8", lineHeight: 1.5 }}>
+                <span className="mt-[7px] w-1.5 h-1.5 rounded-full bg-yomtal-orange flex-shrink-0" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        )}
         <div
           className="mt-6 h-[2px] rounded-full transition-all duration-300"
           style={{
