@@ -3,9 +3,18 @@ import { motion } from "framer-motion";
 
 const services = [
   {
-    title: "Seguridad de TI",
-    desc: "Protegemos la infraestructura tecnológica de tu empresa mediante soluciones avanzadas de ciberseguridad que previenen, detectan y responden a amenazas en tiempo real.",
-    icon: (
+    {
+  title: "Seguridad de TI",
+  desc: "Protegemos la infraestructura tecnológica de tu empresa mediante soluciones avanzadas de ciberseguridad que previenen, detectan y responden a amenazas en tiempo real.",
+  items: [
+    "Firewall Next-Generation",
+    "Prevención de Intrusiones IPS en tiempo real",
+    "Protección avanzada de correo electrónico",
+    "SIEM y correlación de eventos con IA",
+    "Gestión continua de exposición a amenazas CTEM",
+    "Validación continua de seguridad y prevención de fuga de datos",
+  ],
+  icon: (
       <svg
         width="40"
         height="40"
