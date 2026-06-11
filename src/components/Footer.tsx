@@ -141,7 +141,7 @@ const Footer = () => (
 
       <div className="mt-10 pt-6" style={{ borderTop: "1px solid #222" }}>
         <p className="text-xs text-center" style={{ color: "#555" }}>
-          © 2024 YOMTAL. Todos los derechos reservados.
+          © 2026 YOMTAL. Todos los derechos reservados.
         </p>
       </div>
     </div>
