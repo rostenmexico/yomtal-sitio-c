@@ -154,10 +154,18 @@ const services = [
       </svg>
     ),
   },
-  {
-    title: "Continuidad Operativa y Resiliencia Tecnológica",
-    desc: "Diseñamos estrategias para mantener servicios críticos disponibles, reducir interrupciones y fortalecer la capacidad de recuperación ante incidentes, fallas o desastres.",
-    icon: (
+ {
+  title: "Continuidad Operativa y Resiliencia Tecnológica",
+  desc: "Diseñamos estrategias para mantener servicios críticos disponibles, reducir interrupciones y fortalecer la capacidad de recuperación ante incidentes, fallas o desastres.",
+  items: [
+    "Estrategias de continuidad operativa",
+    "Planes de recuperación ante desastres",
+    "Reducción de interrupciones en servicios críticos",
+    "Arquitecturas resilientes y tolerantes a fallos",
+    "Evaluación de riesgos operativos",
+    "Fortalecimiento de la disponibilidad tecnológica",
+  ],
+  icon: (
       <svg
         width="40"
         height="40"
