@@ -17,12 +17,18 @@ const FinalCTASection = () => (
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        <h2 className="text-[clamp(1.6rem,4vw,2.4rem)] font-bold leading-tight" style={{ color: "#ffffff" }}>
-          Hablemos de la seguridad y continuidad de tu operación
+        <span className="overline">Solicita asesoría</span>
+
+        <h2 className="mt-3 text-[clamp(1.6rem,4vw,2.4rem)] font-bold leading-tight" style={{ color: "#ffffff" }}>
+          Fortalezcamos juntos la seguridad y continuidad de tu operación
         </h2>
-        <p className="mt-4 text-sm max-w-lg mx-auto" style={{ color: "#888888" }}>
-          Te ayudamos a evaluar, fortalecer e implementar soluciones de TI alineadas a tus objetivos de negocio.
+
+        <p className="mt-5 text-sm md:text-base max-w-3xl mx-auto" style={{ color: "#888888", lineHeight: 1.8 }}>
+          Ya sea que busques optimizar tu infraestructura, fortalecer tu estrategia de ciberseguridad, cumplir
+          requerimientos regulatorios o incorporar capacidades especializadas, nuestro equipo puede ayudarte a
+          identificar oportunidades de mejora alineadas a los objetivos de tu negocio.
         </p>
+
         <div className="mt-8 flex flex-wrap justify-center gap-4">
           <a
             href="https://wa.me/523336485683?text=Hola%2C%20quiero%20hablar%20con%20un%20especialista%20de%20YOMTAL."
@@ -32,6 +38,7 @@ const FinalCTASection = () => (
           >
             Hablar con un especialista
           </a>
+
           <a
             href="#contacto"
             className="px-8 py-3.5 text-sm font-medium rounded-full border transition-colors duration-200"
