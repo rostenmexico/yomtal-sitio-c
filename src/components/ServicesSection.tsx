@@ -205,7 +205,7 @@ const ServicesSection = () => (
       >
         <span className="overline">Servicios</span>
         <h2 className="text-[2rem] font-bold mt-3" style={{ color: "#ffffff" }}>
-          Soluciones integrales para tu infraestructura
+          Soluciones integrales para seguridad, redes y continuidad operativa
         </h2>
       </motion.div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
