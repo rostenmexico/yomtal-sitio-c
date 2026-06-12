@@ -7,12 +7,12 @@ const MissionVisionSection = () => (
         {[
           {
             label: "MISIÓN",
-            text: "Crear soluciones de valor para nuestros clientes mediante la combinación de gente, procesos y herramientas de TI que generen alto valor al logro de sus objetivos de negocio.",
+            text: "Crear soluciones de valor para nuestros clientes mediante la combinación de gente, procesos y herramientas de TI que fortalezcan la seguridad, continuidad operativa y logro de sus objetivos de negocio.",
             from: -40,
           },
           {
             label: "VISIÓN",
-            text: "Ser un referente y consultor de confianza para nuestros clientes, constituyéndonos como el mejor integrador de soluciones de valor agregado.",
+            text: "Ser un referente y consultor de confianza para nuestros clientes, constituyéndonos como un integrador especializado en soluciones de infraestructura tecnológica, ciberseguridad y continuidad operativa.",
             from: 40,
           },
         ].map((panel, i) => (
@@ -25,8 +25,15 @@ const MissionVisionSection = () => (
             className="relative p-10 md:p-14"
             style={{ borderLeft: i === 1 ? "1px solid #333" : "none" }}
           >
-            <span className="absolute top-6 left-8 text-[80px] font-bold leading-none select-none" style={{ color: "rgba(247,176,23,0.15)" }}>"</span>
+            <span
+              className="absolute top-6 left-8 text-[80px] font-bold leading-none select-none"
+              style={{ color: "rgba(247,176,23,0.15)" }}
+            >
+              "
+            </span>
+
             <span className="overline relative z-10">{panel.label}</span>
+
             <p className="mt-6 text-[1.1rem] font-light leading-[1.9] relative z-10" style={{ color: "#cccccc" }}>
               {panel.text}
             </p>
