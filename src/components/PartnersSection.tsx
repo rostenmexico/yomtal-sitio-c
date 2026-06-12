@@ -34,7 +34,7 @@ const PartnersSection = () => (
             viewport={{ once: true }}
             transition={{ delay: i * 0.08, duration: 0.5 }}
             className="text-lg font-bold tracking-tight transition-all duration-300 cursor-default select-none"
-            style={{ color: "#666666", filter: "grayscale(1)", opacity: 0.5 }}
+            style={{ color: "#888888", filter: "grayscale(1)", opacity: 0.75 }}
             onMouseEnter={(e) => {
               const el = e.currentTarget;
               el.style.filter = "none";
@@ -44,8 +44,8 @@ const PartnersSection = () => (
             onMouseLeave={(e) => {
               const el = e.currentTarget;
               el.style.filter = "grayscale(1)";
-              el.style.opacity = "0.5";
-              el.style.color = "#666666";
+              el.style.opacity = "0.75";
+              el.style.color = "#888888";
             }}
           >
             {name}
