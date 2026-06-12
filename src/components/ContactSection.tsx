@@ -55,9 +55,7 @@ const ContactSection = () => {
           className="text-center mb-14"
         >
           <span className="overline">Contacto</span>
-          <h2 className="text-[2rem] font-bold text-white mt-3">
-            Fortalezcamos juntos la seguridad y continuidad de tu operación
-          </h2>
+          <h2 className="text-[2rem] font-bold text-white mt-3">Solicita asesoría especializada</h2>
           <p className="mt-4 max-w-3xl mx-auto text-sm md:text-base text-gray-400" style={{ lineHeight: 1.8 }}>
             Ya sea que busques optimizar tu infraestructura, fortalecer tu estrategia de ciberseguridad, cumplir
             requerimientos regulatorios o incorporar capacidades especializadas, nuestro equipo puede ayudarte a
