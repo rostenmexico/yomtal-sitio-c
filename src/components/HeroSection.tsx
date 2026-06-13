@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import YomtalHero3D from "./YomtalHero3D";
 
 const HeroSection = () => {
   const headline = "Protegemos la infraestructura que sostiene tu operación";
@@ -7,9 +8,10 @@ const HeroSection = () => {
   return (
     <section id="inicio" className="relative z-10 min-h-screen flex items-center bg-transparent overflow-hidden">
       <div className="container mx-auto px-6 relative z-10">
-        <div className="max-w-3xl">
-          {/* Text */}
-          <div className="pt-20 lg:pt-0">
+        <div className="flex items-center justify-between gap-8 lg:gap-16">
+
+          {/* ── Left: text content ── */}
+          <div className="flex-1 max-w-xl pt-20 lg:pt-0">
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
@@ -19,6 +21,7 @@ const HeroSection = () => {
             >
               <span className="text-xs font-semibold tracking-[0.18em] uppercase">Protegiendo Estrategias</span>
             </motion.div>
+
             <h1
               className="font-bold tracking-[-0.03em]"
               style={{ fontSize: "clamp(2.4rem, 5vw, 3.8rem)", lineHeight: 1.1, color: "#ffffff" }}
@@ -80,6 +83,18 @@ const HeroSection = () => {
               </a>
             </motion.div>
           </div>
+
+          {/* ── Right: 3D logo (desktop only) ── */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.3, duration: 0.9, ease: "easeOut" }}
+            className="hidden lg:block flex-shrink-0 w-[480px] h-[480px]"
+            aria-hidden="true"
+          >
+            <YomtalHero3D />
+          </motion.div>
+
         </div>
       </div>
     </section>
