@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 
 const reasons = [
@@ -5,133 +6,118 @@ const reasons = [
     num: "01",
     title: "Experiencia comprobada",
     desc: "Más de una década acompañando proyectos de infraestructura tecnológica y ciberseguridad para entornos empresariales.",
-    icon: (
-      <svg
-        width="32"
-        height="32"
-        viewBox="0 0 32 32"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M6 26V8a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v18" />
-        <path d="M4 26h24" />
-        <path d="M11 12h10" />
-        <path d="M11 17h10" />
-        <path d="M11 22h6" />
-      </svg>
-    ),
   },
   {
     num: "02",
     title: "Especialistas certificados",
     desc: "Contamos con ingenieros certificados y especialistas con amplia experiencia en redes, seguridad e infraestructura crítica.",
-    icon: (
-      <svg
-        width="32"
-        height="32"
-        viewBox="0 0 32 32"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <circle cx="16" cy="11" r="6" />
-        <path d="M11 17l-2 10 7-4 7 4-2-10" />
-      </svg>
-    ),
   },
   {
     num: "03",
     title: "Cobertura regional",
     desc: "Brindamos soporte e implementación para operaciones en México, Estados Unidos y Latinoamérica bajo un solo punto de contacto.",
-    icon: (
-      <svg
-        width="32"
-        height="32"
-        viewBox="0 0 32 32"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <circle cx="16" cy="16" r="12" />
-        <path d="M4 16h24" />
-        <path d="M16 4c4 4 6 8 6 12s-2 8-6 12" />
-        <path d="M16 4c-4 4-6 8-6 12s2 8 6 12" />
-      </svg>
-    ),
   },
   {
     num: "04",
     title: "Enfoque consultivo",
     desc: "Diseñamos soluciones alineadas a los objetivos del negocio, priorizando continuidad, reducción de riesgos y generación de valor.",
-    icon: (
-      <svg
-        width="32"
-        height="32"
-        viewBox="0 0 32 32"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <circle cx="14" cy="14" r="8" />
-        <path d="M20 20l7 7" />
-        <path d="M10 14l3 3 6-6" />
-      </svg>
-    ),
   },
   {
     num: "05",
     title: "Capacidad integral",
     desc: "Diseñamos, implementamos, administramos y soportamos soluciones tecnológicas de misión crítica durante todo su ciclo de vida.",
-    icon: (
-      <svg
-        width="32"
-        height="32"
-        viewBox="0 0 32 32"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M16 4l10 6v12l-10 6-10-6V10l10-6z" />
-        <path d="M16 16l10-6" />
-        <path d="M16 16v12" />
-        <path d="M16 16L6 10" />
-      </svg>
-    ),
   },
   {
     num: "06",
     title: "Compromiso a largo plazo",
     desc: "Acompañamos la operación, mejora y evolución de las soluciones implementadas para fortalecer la continuidad operativa.",
-    icon: (
-      <svg
-        width="32"
-        height="32"
-        viewBox="0 0 32 32"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M6 16a10 10 0 0 1 17-7" />
-        <path d="M23 9V4h5" />
-        <path d="M26 16a10 10 0 0 1-17 7" />
-        <path d="M9 23v5H4" />
-      </svg>
-    ),
   },
 ];
+
+const WhyRow = ({ reason, delay }: { reason: (typeof reasons)[0]; delay: number }) => {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ delay, duration: 0.5 }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className="border-b"
+      style={{
+        borderColor: "rgba(255,255,255,0.07)",
+        backgroundColor: hovered ? "rgba(247,176,23,0.03)" : "transparent",
+        transition: "background-color 0.2s ease",
+        padding: "28px 0",
+      }}
+    >
+      {/*
+        Mobile:  2 cols [40px | flex col: title + desc]
+        Desktop: 3 cols [56px | title | desc] via lg:contents on wrapper
+      */}
+      <div className="grid grid-cols-[40px_1fr] lg:grid-cols-[56px_1fr_1.8fr] gap-x-6 lg:gap-x-10 items-start">
+
+        {/* Column 1 — number */}
+        <span
+          style={{
+            fontFamily: "'JetBrains Mono', monospace",
+            fontSize: "11px",
+            letterSpacing: "0.2em",
+            color: hovered ? "#f0f0f0" : "#F7B017",
+            paddingTop: "2px",
+            transition: "color 0.2s ease",
+            display: "block",
+          }}
+        >
+          {reason.num}
+        </span>
+
+        {/* Mobile wrapper: title + desc stacked. On lg becomes transparent (contents) */}
+        <div className="lg:contents">
+
+          {/* Column 2 — title */}
+          <span
+            style={{
+              fontFamily: "'Barlow Condensed', sans-serif",
+              fontWeight: 600,
+              fontSize: "clamp(1.05rem, 1.6vw, 1.25rem)",
+              letterSpacing: "-0.005em",
+              color: hovered ? "#F7B017" : "#f0f0f0",
+              lineHeight: 1.2,
+              display: "block",
+              transition: "color 0.2s ease",
+            }}
+          >
+            {reason.title}
+          </span>
+
+          {/* Description — mobile only (inside the 2-col wrapper) */}
+          <p
+            className="lg:hidden"
+            style={{
+              fontSize: "13.5px",
+              color: "#606474",
+              lineHeight: 1.7,
+              margin: "10px 0 0",
+            }}
+          >
+            {reason.desc}
+          </p>
+        </div>
+
+        {/* Column 3 — description, desktop only */}
+        <p
+          className="hidden lg:block"
+          style={{ fontSize: "13.5px", color: "#606474", lineHeight: 1.7, margin: 0 }}
+        >
+          {reason.desc}
+        </p>
+      </div>
+    </motion.div>
+  );
+};
 
 const WhyYomtalSection = () => (
   <section className="relative z-10 bg-[#13151f]/90 backdrop-blur-sm section-padding">
@@ -141,34 +127,41 @@ const WhyYomtalSection = () => (
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="text-center mb-14"
+        className="mb-14"
       >
         <span className="overline">Por qué elegirnos</span>
-        <h2 className="text-[2rem] font-bold text-white mt-3">¿Por qué YOMTAL?</h2>
-        <p className="mt-4 max-w-3xl mx-auto text-sm md:text-base text-gray-400" style={{ lineHeight: 1.8 }}>
+
+        <h2
+          className="mt-3"
+          style={{
+            fontFamily: "'Barlow Condensed', sans-serif",
+            fontWeight: 600,
+            fontSize: "clamp(2rem, 3.5vw, 2.8rem)",
+            letterSpacing: "-0.01em",
+            color: "#f0f0f0",
+          }}
+        >
+          ¿Por qué YOMTAL?
+        </h2>
+
+        <p
+          className="mt-4 max-w-3xl text-sm md:text-base"
+          style={{ color: "#606474", lineHeight: 1.85 }}
+        >
           Combinamos experiencia, especialización técnica y enfoque consultivo para ayudar a las organizaciones a
           reducir riesgos, fortalecer su infraestructura y mantener la continuidad de sus operaciones críticas.
         </p>
-        <div className="mx-auto mt-5 w-10 h-[3px] bg-yomtal-orange rounded-full" />
+
+        <div
+          className="mt-5"
+          style={{ width: "40px", height: "2px", backgroundColor: "#F7B017", borderRadius: 0 }}
+        />
       </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* Editorial rows */}
+      <div style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}>
         {reasons.map((reason, i) => (
-          <motion.div
-            key={reason.num}
-            initial={{ opacity: 0, y: 32 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ delay: i * 0.08, duration: 0.6 }}
-            className="bg-[#1a1c2e]/80 p-8 rounded-2xl border border-white/10 hover:border-yomtal-orange/60 transition-all duration-250 hover:-translate-y-1 group"
-          >
-            <span className="text-[13px] font-bold tracking-widest text-yomtal-orange">{reason.num}</span>
-            <div className="text-yomtal-orange mt-4 mb-3">{reason.icon}</div>
-            <h3 className="text-lg font-bold text-white mb-3">{reason.title}</h3>
-            <p className="text-sm text-gray-400" style={{ lineHeight: 1.7 }}>
-              {reason.desc}
-            </p>
-          </motion.div>
+          <WhyRow key={reason.num} reason={reason} delay={i * 0.07} />
         ))}
       </div>
     </div>

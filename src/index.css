@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;900&family=Barlow:wght@400;500&family=Space+Grotesk:wght@300;400;500&family=JetBrains+Mono:wght@400&family=Inter:wght@300;400;500;600;700&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -74,27 +74,51 @@
 
   html {
     scroll-behavior: smooth;
-    font-family: "Inter", sans-serif;
+    font-family: "Barlow", sans-serif;
   }
 
   body {
     @apply text-foreground;
-    background-color: #070b14;
+    background-color: #080a10;
     font-size: 16px;
-    line-height: 1.7;
+    line-height: 1.85;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    color: #f0f0f0;
   }
 
-  h1,
-  h2,
+  h1 {
+    font-family: "Barlow Condensed", sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  h2 {
+    font-family: "Barlow Condensed", sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
   h3,
   h4,
   h5,
   h6 {
-    font-weight: 700;
-    letter-spacing: -0.02em;
+    font-family: "Barlow Condensed", sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.005em;
   }
+}
+
+/* ── Scrollbar ──────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: #0c0f18;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(247, 176, 23, 0.3);
+  border-radius: 0;
 }
 
 @layer components {
@@ -103,7 +127,7 @@
   }
 
   .section-dark {
-    background-color: rgba(7, 11, 20, 0.82);
+    background-color: rgba(8, 10, 16, 0.92);
     backdrop-filter: blur(2px);
   }
 
@@ -112,24 +136,81 @@
     backdrop-filter: blur(6px);
   }
 
+  /* Legacy pill style — kept for backward compat but overridden by sharp classes */
   .btn-primary {
-    background-color: hsl(var(--yomtal-orange));
-    color: hsl(var(--yomtal-dark));
-    font-weight: 700;
-    border-radius: 9999px;
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    background-color: #F7B017;
+    color: #0d0d0d;
+    font-weight: 600;
+    border-radius: 2px;
+    transition: all 0.2s ease;
+    letter-spacing: 0.01em;
   }
 
   .btn-primary:hover {
-    background-color: hsl(var(--yomtal-orange-secondary));
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(247, 176, 23, 0.35);
+    background-color: #F97316;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(247, 176, 23, 0.28);
   }
 
-  .overline {
-    font-size: 11px;
-    letter-spacing: 0.15em;
+  /* ── New sharp button classes ─────────────────────────────────────────────── */
+  .sharp-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #F7B017;
+    color: #080a10;
     font-weight: 600;
+    font-size: 14px;
+    border-radius: 2px;
+    padding: 12px 28px;
+    border: 1px solid transparent;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .sharp-btn-primary:hover {
+    background-color: #F97316;
+    box-shadow: 0 6px 20px rgba(247, 176, 23, 0.28);
+    transform: translateY(-1px);
+  }
+
+  .sharp-btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: transparent;
+    color: #f0f0f0;
+    font-weight: 500;
+    font-size: 14px;
+    border-radius: 2px;
+    padding: 12px 28px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: border-color 0.2s ease, color 0.2s ease;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .sharp-btn-ghost:hover {
+    border-color: #F7B017;
+    color: #F7B017;
+  }
+
+  /* ── Terminal / mono label ────────────────────────────────────────────────── */
+  .terminal-label {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(247, 176, 23, 0.6);
+  }
+
+  /* ── Overline (section eyebrow) ───────────────────────────────────────────── */
+  .overline {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    font-weight: 400;
     color: hsl(var(--yomtal-orange));
     text-transform: uppercase;
   }
@@ -139,7 +220,7 @@
   }
 
   .text-body-light {
-    color: hsl(var(--yomtal-body-light));
+    color: #606474;
   }
 }
 
@@ -168,7 +249,7 @@
   .bg-\[\#111\],
   .bg-\[\#0f0f0f\],
   .bg-\[\#0f1117\] {
-    background-color: rgba(7, 11, 20, 0.85) !important;
+    background-color: rgba(8, 10, 16, 0.9) !important;
     backdrop-filter: blur(2px);
   }
 }
@@ -210,4 +291,22 @@
 
 .animate-spin-slow {
   animation: spin-slow 32s linear infinite;
+}
+
+/* Logo ring sweep — synced to NetworkCanvas radar: 0.003 rad/frame × 60fps → 34.9s/rev */
+@keyframes logo-radar-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* NOC Status Panel — scan line top → bottom */
+@keyframes noc-scan {
+  from { top: 0; }
+  to   { top: 100%; }
+}
+
+/* NOC Status Panel — pulsing dot */
+@keyframes noc-pulse {
+  0%, 100% { opacity: 1;   box-shadow: 0 0 0px rgba(247,176,23,0); }
+  50%       { opacity: 0.4; box-shadow: 0 0 5px rgba(247,176,23,0.45); }
 }

@@ -3,7 +3,21 @@ import { motion } from "framer-motion";
 const partners = ["Check Point", "Cisco", "A10", "Exabeam / LogRhythm", "Picus", "DigiCert", "NordPass / NordStellar"];
 
 const PartnersSection = () => (
-  <section id="socios" className="relative z-10 bg-[#0f1117]/95 backdrop-blur-sm section-padding">
+  <section id="socios" className="relative z-10 bg-[#0f1117]/95 backdrop-blur-sm section-padding overflow-hidden">
+    <img
+      src="/bg-partners.png"
+      alt=""
+      aria-hidden="true"
+      style={{
+        position: "absolute",
+        inset: 0,
+        width: "100%",
+        height: "100%",
+        objectFit: "cover",
+        opacity: 0.07,
+        pointerEvents: "none",
+      }}
+    />
     <div className="container mx-auto px-6 text-center">
       <motion.div
         initial={{ opacity: 0, y: 32 }}

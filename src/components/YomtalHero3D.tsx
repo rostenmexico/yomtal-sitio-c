@@ -17,16 +17,11 @@ function YomtalLogo({ mousePos }: LogoProps) {
   const groupRef = useRef<THREE.Group>(null);
   const [hovered, setHovered] = useState(false);
 
-  // Keep separate refs so we can accumulate Y auto-rotation while lerping tilt
-  const autoRotY = useRef(0);
   const mouseTiltX = useRef(0);
   const mouseTiltY = useRef(0);
 
   useFrame((_, delta) => {
     if (!groupRef.current) return;
-
-    // Continuous slow Y-axis rotation
-    autoRotY.current += delta * 0.35;
 
     const maxAngle = THREE.MathUtils.degToRad(15);
 
@@ -42,7 +37,7 @@ function YomtalLogo({ mousePos }: LogoProps) {
       0.08
     );
 
-    groupRef.current.rotation.y = autoRotY.current + mouseTiltY.current;
+    groupRef.current.rotation.y = mouseTiltY.current;
     groupRef.current.rotation.x = mouseTiltX.current;
 
     // Smooth hover scale
@@ -159,7 +154,7 @@ export default function YomtalHero3D({ width = "100%", height = "100%" }: Yomtal
 
   return (
     <div
-      style={{ width, height }}
+      style={{ width, height, display: "none" }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >

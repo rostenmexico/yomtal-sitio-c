@@ -132,7 +132,7 @@ const NetworkCanvas = () => {
       const time = timeRef.current;
       const scanAngle = scanAngleRef.current;
 
-      ctx.fillStyle = "#070b14";
+      ctx.fillStyle = "#080a10";
       ctx.fillRect(0, 0, W, H);
 
       // Radar sweep
@@ -189,8 +189,9 @@ const NetworkCanvas = () => {
         h.clickPulse *= 0.88;
 
         const isRed = h.alertPulse > 0.08;
-        const baseAlpha = 0.07 + h.pulse * 0.38 + (isRed ? h.alertPulse * 0.55 : 0);
-        const fillAlpha = isRed ? h.alertPulse * 0.18 : h.pulse * 0.09;
+        // Hex opacity reduced ~15% from original values
+        const baseAlpha = 0.06 + h.pulse * 0.32 + (isRed ? h.alertPulse * 0.47 : 0);
+        const fillAlpha = isRed ? h.alertPulse * 0.15 : h.pulse * 0.08;
         const fillColor = isRed ? `rgba(255,70,70,${fillAlpha})` : `rgba(247,176,23,${fillAlpha})`;
 
         drawHex(h.x, h.y, HEX_SIZE - 2, baseAlpha, fillColor);

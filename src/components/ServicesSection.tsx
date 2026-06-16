@@ -1,9 +1,10 @@
-import { useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const services = [
   {
     title: "Seguridad de TI",
+    command: "$ yomtal --scan perimeter",
     desc: "Protegemos la infraestructura tecnológica de tu empresa mediante soluciones avanzadas de ciberseguridad que previenen, detectan y responden a amenazas en tiempo real.",
     items: [
       "Firewall Next-Generation",
@@ -13,25 +14,10 @@ const services = [
       "Gestión continua de exposición a amenazas CTEM",
       "Validación continua de seguridad y prevención de fuga de datos",
     ],
-    icon: (
-      <svg
-        width="40"
-        height="40"
-        viewBox="0 0 40 40"
-        fill="none"
-        stroke="#F7B017"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M20 4L6 10v9c0 9 6.3 16.8 14 18.7C27.7 35.8 34 28 34 19V10L20 4z" />
-        <rect x="16" y="18" width="8" height="6" rx="1" />
-        <path d="M20 18v-3a4 4 0 0 1 8 0v3" />
-      </svg>
-    ),
   },
   {
     title: "Redes de Alto Rendimiento y Continuidad Operativa",
+    command: "$ yomtal --design topology",
     desc: "Diseñamos e implementamos infraestructuras de red modernas, seguras y altamente disponibles que optimizan el rendimiento, la escalabilidad y la continuidad de los servicios críticos.",
     items: [
       "Arquitectura de redes empresariales",
@@ -41,28 +27,10 @@ const services = [
       "Gestión centralizada de DNS, DHCP e IP",
       "Diseño de redes tolerantes a fallos",
     ],
-    icon: (
-      <svg
-        width="40"
-        height="40"
-        viewBox="0 0 40 40"
-        fill="none"
-        stroke="#F7B017"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <circle cx="20" cy="10" r="4" />
-        <circle cx="10" cy="30" r="4" />
-        <circle cx="30" cy="30" r="4" />
-        <line x1="20" y1="14" x2="10" y2="26" />
-        <line x1="20" y1="14" x2="30" y2="26" />
-        <line x1="14" y1="30" x2="26" y2="30" />
-      </svg>
-    ),
   },
   {
     title: "Auditoría, Riesgo y Cumplimiento Normativo",
+    command: "$ yomtal --audit compliance",
     desc: "Ayudamos a identificar riesgos, fortalecer controles de seguridad y cumplir regulaciones mediante auditorías, análisis de vulnerabilidades y estrategias alineadas al negocio.",
     items: [
       "Diagnóstico integral de seguridad",
@@ -73,25 +41,10 @@ const services = [
       "Cumplimiento normativo y gestión de riesgos",
       "Capacitación y concientización en ciberseguridad",
     ],
-    icon: (
-      <svg
-        width="40"
-        height="40"
-        viewBox="0 0 40 40"
-        fill="none"
-        stroke="#F7B017"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M10 5h15l5 5v22a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" />
-        <polyline points="25 5 25 10 30 10" />
-        <polyline points="14 21 18 25 26 17" />
-      </svg>
-    ),
   },
   {
     title: "Servicios Administrados de TI y Ciberseguridad",
+    command: "$ yomtal --manage infrastructure",
     desc: "Maximizamos la disponibilidad, seguridad y rendimiento de tu infraestructura mediante servicios administrados, monitoreo continuo y soporte especializado.",
     items: [
       "Soporte administrado de infraestructura de redes y seguridad",
@@ -101,27 +54,10 @@ const services = [
       "Transferencia de conocimiento y capacitación",
       "Optimización de recursos para enfocarte en el crecimiento del negocio",
     ],
-    icon: (
-      <svg
-        width="40"
-        height="40"
-        viewBox="0 0 40 40"
-        fill="none"
-        stroke="#F7B017"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <rect x="7" y="8" width="26" height="18" rx="2" />
-        <path d="M12 31h16" />
-        <path d="M20 26v5" />
-        <path d="M13 15h14" />
-        <path d="M13 20h9" />
-      </svg>
-    ),
   },
   {
     title: "Soporte e Implementación Regional sin Fronteras",
+    command: "$ yomtal --deploy regional",
     desc: "Brindamos soporte especializado e implementación de proyectos para infraestructura de redes y ciberseguridad en México, Estados Unidos y Latinoamérica.",
     items: [
       "Cobertura regional para México, Estados Unidos y LATAM",
@@ -131,26 +67,10 @@ const services = [
       "Equipo de ingenieros especializados",
       "Continuidad operativa durante todo el ciclo de vida de la solución",
     ],
-    icon: (
-      <svg
-        width="40"
-        height="40"
-        viewBox="0 0 40 40"
-        fill="none"
-        stroke="#F7B017"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <circle cx="20" cy="20" r="14" />
-        <path d="M6 20h28" />
-        <path d="M20 6c4 4 6 8.5 6 14s-2 10-6 14" />
-        <path d="M20 6c-4 4-6 8.5-6 14s2 10 6 14" />
-      </svg>
-    ),
   },
   {
     title: "Continuidad Operativa y Resiliencia Tecnológica",
+    command: "$ yomtal --init resilience",
     desc: "Diseñamos estrategias para mantener servicios críticos disponibles, reducir interrupciones y fortalecer la capacidad de recuperación ante incidentes, fallas o desastres.",
     items: [
       "Estrategias de continuidad operativa",
@@ -160,120 +80,217 @@ const services = [
       "Evaluación de riesgos operativos",
       "Fortalecimiento de la disponibilidad tecnológica",
     ],
-    icon: (
-      <svg
-        width="40"
-        height="40"
-        viewBox="0 0 40 40"
-        fill="none"
-        stroke="#F7B017"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <line x1="20" y1="6" x2="20" y2="16" />
-        <line x1="10" y1="16" x2="30" y2="16" />
-        <line x1="10" y1="16" x2="7" y2="28" />
-        <line x1="30" y1="16" x2="33" y2="28" />
-        <circle cx="7" cy="30" r="3" />
-        <circle cx="33" cy="30" r="3" />
-        <circle cx="20" cy="5" r="2.5" />
-      </svg>
-    ),
   },
 ];
 
-const ServiceCard = ({ service, index }: { service: (typeof services)[0]; index: number }) => {
-  const cardRef = useRef<HTMLDivElement>(null);
+const ServiceBlock = ({
+  service,
+  index,
+  isOpen,
+  onToggle,
+}: {
+  service: (typeof services)[0];
+  index: number;
+  isOpen: boolean;
+  onToggle: () => void;
+}) => {
   const [hovered, setHovered] = useState(false);
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    cardRef.current.style.transform = `perspective(800px) rotateY(${x * 8}deg) rotateX(${y * -8}deg) translateY(-6px)`;
-    cardRef.current.style.boxShadow = `${x * -12}px ${y * -12}px 32px rgba(247,176,23,0.12)`;
-  };
-
-  const handleMouseLeave = () => {
-    if (!cardRef.current) return;
-    cardRef.current.style.transform = "perspective(800px) rotateY(0) rotateX(0) translateY(0)";
-    cardRef.current.style.boxShadow = "none";
-    setHovered(false);
-  };
+  const active = isOpen || hovered;
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 32 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ delay: index * 0.12, duration: 0.6 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ delay: index * 0.07, duration: 0.5 }}
+      style={{ borderBottom: "1px solid rgba(255,255,255,0.07)" }}
     >
-      <div
-        ref={cardRef}
-        onMouseMove={handleMouseMove}
+      {/* ── Header row ── */}
+      <button
+        onClick={onToggle}
         onMouseEnter={() => setHovered(true)}
-        onMouseLeave={handleMouseLeave}
-        className="p-8 rounded-2xl h-full flex flex-col"
+        onMouseLeave={() => setHovered(false)}
+        className="w-full text-left flex items-center gap-4 py-5"
         style={{
-          backgroundColor: "#242424",
-          border: "1px solid #333333",
-          transition: "transform 0.4s cubic-bezier(0.4,0,0.2,1), box-shadow 0.4s cubic-bezier(0.4,0,0.2,1)",
+          borderLeft: active ? "2px solid #F7B017" : "2px solid transparent",
+          paddingLeft: "18px",
+          transition: "border-color 0.2s ease",
+          background: "none",
+          cursor: "pointer",
         }}
       >
-        <div className="mb-5">{service.icon}</div>
-        <h3 className="text-lg font-bold mb-3" style={{ color: "#ffffff" }}>
-          {service.title}
-        </h3>
-        <p className="text-[13.5px] leading-relaxed" style={{ color: "#8a8a8a", lineHeight: 1.7 }}>
-          {service.desc}
-        </p>
-
-        {service.items && (
-          <ul className="mt-5 space-y-2 flex-1">
-            {service.items.map((item, itemIndex) => (
-              <li key={itemIndex} className="flex gap-2 text-sm" style={{ color: "#b8b8b8", lineHeight: 1.5 }}>
-                <span className="mt-[7px] w-1.5 h-1.5 rounded-full bg-yomtal-orange flex-shrink-0" />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-        )}
-        <div
-          className="mt-6 h-[2px] rounded-full transition-all duration-300"
+        {/* Title */}
+        <span
           style={{
-            width: hovered ? "40px" : "0px",
-            backgroundColor: "#F7B017",
+            fontFamily: "'Barlow Condensed', sans-serif",
+            fontWeight: 600,
+            fontSize: "clamp(1rem, 1.8vw, 1.2rem)",
+            letterSpacing: "-0.005em",
+            color: isOpen ? "#F7B017" : "#f0f0f0",
+            transition: "color 0.2s ease",
+            lineHeight: 1.2,
           }}
+        >
+          {service.title}
+        </span>
+
+        {/* Dotted flex separator */}
+        <span
+          className="hidden sm:block flex-1 self-center"
+          style={{
+            borderBottom: "1px dotted rgba(255,255,255,0.1)",
+            minWidth: "24px",
+          }}
+          aria-hidden="true"
         />
-      </div>
+
+        {/* CLI command — hidden on small screens */}
+        <span
+          className="hidden sm:block flex-shrink-0"
+          style={{
+            fontFamily: "'JetBrains Mono', monospace",
+            fontSize: "10px",
+            letterSpacing: "0.06em",
+            color: isOpen ? "rgba(247,176,23,0.75)" : "rgba(247,176,23,0.45)",
+            transition: "color 0.2s ease",
+            whiteSpace: "nowrap",
+          }}
+        >
+          {service.command}
+        </span>
+
+        {/* Chevron */}
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 14 14"
+          fill="none"
+          stroke="#606474"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          style={{
+            flexShrink: 0,
+            marginLeft: "4px",
+            transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
+            transition: "transform 0.3s ease",
+          }}
+          aria-hidden="true"
+        >
+          <path d="M2 4.5l5 5 5-5" />
+        </svg>
+      </button>
+
+      {/* ── Expandable body ── */}
+      <AnimatePresence initial={false}>
+        {isOpen && (
+          <motion.div
+            key="body"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.32, ease: "easeInOut" }}
+            style={{ overflow: "hidden" }}
+          >
+            <div style={{ paddingLeft: "20px", paddingBottom: "28px" }}>
+              {/* CLI command — mobile only */}
+              <p
+                className="sm:hidden mb-4"
+                style={{
+                  fontFamily: "'JetBrains Mono', monospace",
+                  fontSize: "10px",
+                  letterSpacing: "0.06em",
+                  color: "rgba(247,176,23,0.55)",
+                }}
+              >
+                {service.command}
+              </p>
+
+              {/* Description */}
+              <p
+                style={{
+                  fontSize: "14px",
+                  color: "#707480",
+                  lineHeight: 1.8,
+                  marginBottom: "20px",
+                  maxWidth: "680px",
+                }}
+              >
+                {service.desc}
+              </p>
+
+              {/* Capability list */}
+              <ul className="space-y-2">
+                {service.items.map((item, i) => (
+                  <li key={i} className="flex gap-3 text-sm" style={{ color: "#8a9099", lineHeight: 1.5 }}>
+                    <span
+                      style={{
+                        fontFamily: "'JetBrains Mono', monospace",
+                        color: "#F7B017",
+                        fontSize: "12px",
+                        lineHeight: "21px",
+                        flexShrink: 0,
+                      }}
+                    >
+                      ›
+                    </span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 };
 
-const ServicesSection = () => (
-  <section id="servicios" className="relative z-10 bg-[#1a1a1a]/80 section-padding">
-    <div className="container mx-auto px-6">
-      <motion.div
-        initial={{ opacity: 0, y: 32 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="text-center mb-14"
-      >
-        <span className="overline">Servicios</span>
-        <h2 className="text-[2rem] font-bold mt-3" style={{ color: "#ffffff" }}>
-          Soluciones integrales para seguridad, redes y continuidad operativa
-        </h2>
-      </motion.div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {services.map((s, i) => (
-          <ServiceCard key={i} service={s} index={i} />
-        ))}
+const ServicesSection = () => {
+  const [openIndex, setOpenIndex] = useState(0);
+
+  const handleToggle = (i: number) => {
+    setOpenIndex(openIndex === i ? -1 : i);
+  };
+
+  return (
+    <section id="servicios" className="relative z-10 section-padding" style={{ backgroundColor: "rgba(12,15,24,0.95)" }}>
+      <div className="container mx-auto px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 32 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mb-14"
+        >
+          <p className="terminal-label mb-4">// servicios</p>
+          <h2
+            style={{
+              fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)",
+              fontFamily: "'Barlow Condensed', sans-serif",
+              fontWeight: 600,
+              letterSpacing: "-0.01em",
+              color: "#f0f0f0",
+            }}
+          >
+            Soluciones integrales para seguridad, redes y continuidad operativa
+          </h2>
+        </motion.div>
+
+        {/* Accordion list */}
+        <div style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}>
+          {services.map((s, i) => (
+            <ServiceBlock
+              key={i}
+              service={s}
+              index={i}
+              isOpen={openIndex === i}
+              onToggle={() => handleToggle(i)}
+            />
+          ))}
+        </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 export default ServicesSection;
