@@ -18,7 +18,7 @@ const NetworkCanvas = () => {
   const timeRef = useRef<number>(0);
   const mouseRef = useRef({ x: -999, y: -999 });
 
-  const HEX_SIZE = 36;
+  const HEX_SIZE = window.innerWidth < 768 ? 52 : 36;
 
   const hexCenter = useCallback((col: number, row: number, W: number, H: number) => {
     const w = HEX_SIZE * 2;
@@ -67,13 +67,21 @@ const NetworkCanvas = () => {
     if (!ctx) return;
 
     const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      const isMobile = window.innerWidth < 768;
+      const dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 1.5 : 2);
+      canvas.width  = window.innerWidth  * dpr;
+      canvas.height = window.innerHeight * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       buildGrid(window.innerWidth, window.innerHeight);
     };
 
     resize();
-    window.addEventListener("resize", resize);
+    let resizeTimer: ReturnType<typeof setTimeout>;
+    const debouncedResize = () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(resize, 150);
+    };
+    window.addEventListener("resize", debouncedResize);
 
     const handleMouse = (e: MouseEvent) => {
       mouseRef.current = { x: e.clientX, y: e.clientY };
@@ -121,12 +129,20 @@ const NetworkCanvas = () => {
       ctx.stroke();
     };
 
-    const draw = () => {
-      timeRef.current += 0.016;
-      scanAngleRef.current += 0.003;
+    const isMobile = window.innerWidth < 768;
+    const fpsInterval = isMobile ? 1000 / 30 : 1000 / 60;
+    let lastFrameTime = 0;
 
-      const W = canvas.width;
-      const H = canvas.height;
+    const draw = (timestamp: number) => {
+      animRef.current = requestAnimationFrame(draw);
+      if (timestamp - lastFrameTime < fpsInterval) return;
+      lastFrameTime = timestamp;
+
+      timeRef.current += isMobile ? 0.032 : 0.016;
+      scanAngleRef.current += isMobile ? 0.006 : 0.003;
+
+      const W = window.innerWidth;
+      const H = window.innerHeight;
       const cx = W / 2;
       const cy = H / 2;
       const time = timeRef.current;
@@ -138,9 +154,10 @@ const NetworkCanvas = () => {
       // Radar sweep
       ctx.save();
       ctx.translate(cx, cy);
-      for (let i = 0; i < 70; i++) {
+      const sweepSteps = isMobile ? 35 : 70;
+      for (let i = 0; i < sweepSteps; i++) {
         const a = scanAngle - i * 0.022;
-        const alpha = (1 - i / 70) * 0.055;
+        const alpha = (1 - i / sweepSteps) * 0.055;
         ctx.beginPath();
         ctx.moveTo(0, 0);
         ctx.arc(0, 0, Math.max(W, H) * 0.9, a, a + 0.025);
@@ -257,7 +274,6 @@ const NetworkCanvas = () => {
       ctx.fillText(`SYS:${t2}`, 16, H - 16);
       ctx.fillText(`HEX:${hexesRef.current.length}`, 120, H - 16);
 
-      animRef.current = requestAnimationFrame(draw);
     };
 
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -267,7 +283,8 @@ const NetworkCanvas = () => {
 
     return () => {
       cancelAnimationFrame(animRef.current);
-      window.removeEventListener("resize", resize);
+      clearTimeout(resizeTimer);
+      window.removeEventListener("resize", debouncedResize);
       window.removeEventListener("mousemove", handleMouse);
       window.removeEventListener("click", handleClick);
     };
