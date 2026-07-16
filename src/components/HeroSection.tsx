@@ -1,18 +1,126 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import SectionGate from "@/components/SectionGate";
 
 const HeroSection = () => {
   const headline = "Protegemos la infraestructura que sostiene tu operación";
   const words = headline.split(" ");
-  const [isHovered, setIsHovered] = useState(false);
+  const [spotlightVisible, setSpotlightVisible] = useState(false);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    e.currentTarget.style.setProperty("--sp-x", `${e.clientX - rect.left}px`);
+    e.currentTarget.style.setProperty("--sp-y", `${e.clientY - rect.top}px`);
+  };
 
   return (
-    <section id="inicio" className="relative z-10 min-h-screen flex items-center bg-transparent overflow-hidden">
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="flex items-center justify-between gap-8 lg:gap-16">
+    <section
+      id="inicio"
+      className="relative z-10 min-h-screen flex items-center overflow-hidden"
+      style={{ backgroundColor: "#080a10" }}
+    >
+      {/* ── Right: hero image — absolutely covers right 58% of viewport ── */}
+      <motion.div
+        id="hero-radar-anchor"
+        className="hidden lg:block"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.4, duration: 1.1, ease: "easeOut" }}
+        style={{
+          position: "absolute",
+          right: 0,
+          top: 0,
+          bottom: 0,
+          width: "58%",
+          zIndex: 0,
+          overflow: "hidden",
+          cursor: "crosshair",
+        }}
+        onMouseMove={handleMouseMove}
+        onMouseEnter={() => setSpotlightVisible(true)}
+        onMouseLeave={() => setSpotlightVisible(false)}
+      >
+        {/* Base image */}
+        <img
+          src="/hero-shield.png"
+          alt=""
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            inset: 0,
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: "center right",
+          }}
+        />
 
-          {/* ── Left: text content ── */}
-          <div className="flex-1 max-w-xl pt-20 lg:pt-0">
+        {/* Living shadow — amber drift */}
+        <div className="hero-shadow-amber" aria-hidden="true" />
+
+        {/* Living shadow — cyan drift */}
+        <div className="hero-shadow-cyan" aria-hidden="true" />
+
+        {/* Spotlight — follows cursor */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            inset: 0,
+            background:
+              "radial-gradient(circle 320px at var(--sp-x, 50%) var(--sp-y, 50%), rgba(247,176,23,0.20), transparent 70%)",
+            opacity: spotlightVisible ? 1 : 0,
+            transition: "opacity 0.35s ease",
+            pointerEvents: "none",
+            mixBlendMode: "screen",
+          }}
+        />
+
+        {/* Left edge blend — dissolves image into dark background */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            inset: 0,
+            background:
+              "linear-gradient(to right, #080a10 0%, #080a10 6%, rgba(8,10,16,0.85) 18%, rgba(8,10,16,0.4) 32%, transparent 52%)",
+            pointerEvents: "none",
+          }}
+        />
+
+        {/* Top edge blend */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            height: "28%",
+            background: "linear-gradient(to bottom, #080a10 0%, transparent 100%)",
+            pointerEvents: "none",
+          }}
+        />
+
+        {/* Bottom edge blend */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: "22%",
+            background: "linear-gradient(to top, #080a10 0%, transparent 100%)",
+            pointerEvents: "none",
+          }}
+        />
+      </motion.div>
+
+      {/* ── Left: text content — sits above image in z-order ── */}
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="flex items-center">
+          <div className="flex-1 max-w-[520px] pt-20 lg:pt-0">
 
             {/* Badge */}
             <motion.div
@@ -31,7 +139,7 @@ const HeroSection = () => {
               <span
                 style={{
                   fontFamily: "'JetBrains Mono', monospace",
-                  fontSize: "10px",
+                  fontSize: "13px",
                   letterSpacing: "0.15em",
                   textTransform: "uppercase",
                   color: "#F7B017",
@@ -41,7 +149,7 @@ const HeroSection = () => {
               </span>
             </motion.div>
 
-            {/* Headline: Barlow Condensed 700 */}
+            {/* Headline: Barlow Condensed 700 — word-by-word animation */}
             <h1
               style={{
                 fontSize: "clamp(3rem, 6vw, 5rem)",
@@ -71,11 +179,9 @@ const HeroSection = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.6 }}
               className="mt-7"
-              style={{ fontSize: "18px", color: "#707480", lineHeight: 1.85, maxWidth: "440px" }}
+              style={{ fontSize: "18px", color: "#a8acb8", lineHeight: 1.85, maxWidth: "440px" }}
             >
-              En YOMTAL diseñamos e integramos soluciones de ciberseguridad, arquitectura de redes e infraestructura
-              tecnológica que ayudan a las organizaciones a reducir riesgos, fortalecer su resiliencia y mantener la
-              disponibilidad de sus servicios críticos.
+              En YOMTAL diseñamos e integramos soluciones de seguridad, arquitectura de redes que ayudan a las organizaciones a reducir riesgos, fortalecer su resiliencia y mantener la disponibilidad de sus servicios críticos.
             </motion.p>
 
             {/* CTAs */}
@@ -109,13 +215,19 @@ const HeroSection = () => {
               transition={{ delay: 1.0, duration: 0.8 }}
               className="mt-10"
             >
-              <hr style={{ borderColor: "rgba(255,255,255,0.08)", borderTopWidth: "1px", borderStyle: "solid" }} />
+              <hr
+                style={{
+                  borderColor: "rgba(255,255,255,0.08)",
+                  borderTopWidth: "1px",
+                  borderStyle: "solid",
+                }}
+              />
               <p
                 style={{
                   fontFamily: "'JetBrains Mono', monospace",
-                  fontSize: "10px",
+                  fontSize: "12px",
                   letterSpacing: "0.12em",
-                  color: "rgba(255,255,255,0.22)",
+                  color: "rgba(255,255,255,0.50)",
                   marginTop: "10px",
                   textTransform: "uppercase",
                 }}
@@ -124,120 +236,12 @@ const HeroSection = () => {
               </p>
             </motion.div>
           </div>
-
-          {/* ── Right: Logo with radar-synced rings + hover ping effect ── */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.96 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.4, duration: 1.2, ease: "easeOut" }}
-            className="hidden lg:flex flex-shrink-0 items-center justify-center"
-            style={{ width: "420px", height: "420px", position: "relative", cursor: "crosshair" }}
-            aria-hidden="true"
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-          >
-            {/* Static concentric rings — brighten on hover */}
-            {[
-              { size: 300, alpha: 0.13 },
-              { size: 360, alpha: 0.08 },
-              { size: 416, alpha: 0.05 },
-            ].map(({ size, alpha }) => (
-              <div
-                key={size}
-                style={{
-                  position: "absolute",
-                  width: `${size}px`,
-                  height: `${size}px`,
-                  borderRadius: "50%",
-                  border: `1px solid rgba(247,176,23,${isHovered ? Math.min(alpha * 2.2, 0.35) : alpha})`,
-                  boxShadow: isHovered ? `0 0 10px rgba(247,176,23,${alpha * 0.6})` : "none",
-                  transition: "border-color 0.5s ease, box-shadow 0.5s ease",
-                  flexShrink: 0,
-                  pointerEvents: "none",
-                }}
-              />
-            ))}
-
-            {/*
-              Rotating sweep arc — conic-gradient masked to ring band,
-              duration 34.9s matches NetworkCanvas scanAngle += 0.003 rad/frame @ 60fps
-            */}
-            <div
-              style={{
-                position: "absolute",
-                width: "416px",
-                height: "416px",
-                borderRadius: "50%",
-                background:
-                  "conic-gradient(from 0deg, rgba(247,176,23,0.28) 0deg, rgba(247,176,23,0.08) 12deg, transparent 18deg, transparent 360deg)",
-                WebkitMaskImage:
-                  "radial-gradient(circle at center, transparent 148px, rgba(0,0,0,1) 150px, rgba(0,0,0,1) 206px, transparent 208px)",
-                maskImage:
-                  "radial-gradient(circle at center, transparent 148px, rgba(0,0,0,1) 150px, rgba(0,0,0,1) 206px, transparent 208px)",
-                animation: "logo-radar-spin 34.9s linear infinite",
-                pointerEvents: "none",
-              }}
-            />
-
-            {/* Ping rings — sonar emanation on hover */}
-            {[0, 0.55, 1.1].map((delay, i) => (
-              <motion.div
-                key={`ping-${i}`}
-                style={{
-                  position: "absolute",
-                  width: "416px",
-                  height: "416px",
-                  borderRadius: "50%",
-                  border: "1px solid rgba(247,176,23,0.55)",
-                  pointerEvents: "none",
-                }}
-                animate={
-                  isHovered
-                    ? { scale: [0.05, 1.05], opacity: [0.7, 0] }
-                    : { scale: 0.05, opacity: 0 }
-                }
-                transition={
-                  isHovered
-                    ? { duration: 1.6, repeat: Infinity, delay, ease: "easeOut", repeatDelay: 0 }
-                    : { duration: 0.3 }
-                }
-              />
-            ))}
-
-            {/* Ambient amber halo behind logo */}
-            <div
-              style={{
-                position: "absolute",
-                width: "320px",
-                height: "320px",
-                borderRadius: "50%",
-                background: isHovered
-                  ? "radial-gradient(circle at center, rgba(247,176,23,0.16) 0%, rgba(247,176,23,0.07) 40%, transparent 68%)"
-                  : "radial-gradient(circle at center, rgba(247,176,23,0.10) 0%, rgba(247,176,23,0.04) 40%, transparent 68%)",
-                transition: "background 0.5s ease",
-                pointerEvents: "none",
-              }}
-            />
-
-            {/* YOMTAL logo — fade + scale entrance, screen blend removes white bg */}
-            <motion.img
-              src="/logo-yomtal-main.png"
-              alt="YOMTAL"
-              style={{
-                width: "280px",
-                height: "auto",
-                mixBlendMode: "screen",
-                position: "relative",
-                zIndex: 1,
-                display: "block",
-              }}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.7, duration: 1.4, ease: "easeOut" }}
-            />
-          </motion.div>
-
         </div>
+      </div>
+
+      {/* HUD bottom nav — absolute so it doesn't interfere with the flex centering layout */}
+      <div className="next-section-wrap" style={{ position: "absolute", bottom: 0, left: 0, right: 0, zIndex: 2 }}>
+        <SectionGate refId="001" label="Nosotros" targetId="nosotros" />
       </div>
     </section>
   );

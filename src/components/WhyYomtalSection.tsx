@@ -1,36 +1,37 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import SectionGate from "@/components/SectionGate";
 
 const reasons = [
   {
     num: "01",
     title: "Experiencia comprobada",
-    desc: "Más de una década acompañando proyectos de infraestructura tecnológica y ciberseguridad para entornos empresariales.",
+    desc: "Más de una década acompañando proyectos de infraestructura y ciberseguridad.",
   },
   {
     num: "02",
     title: "Especialistas certificados",
-    desc: "Contamos con ingenieros certificados y especialistas con amplia experiencia en redes, seguridad e infraestructura crítica.",
+    desc: "Equipo de ingenieros certificados y especialistas con amplia experiencia en entornos empresariales.",
   },
   {
     num: "03",
     title: "Cobertura regional",
-    desc: "Brindamos soporte e implementación para operaciones en México, Estados Unidos y Latinoamérica bajo un solo punto de contacto.",
+    desc: "Cobertura y soporte para operaciones en México, Estados Unidos y Latinoamérica.",
   },
   {
     num: "04",
     title: "Enfoque consultivo",
-    desc: "Diseñamos soluciones alineadas a los objetivos del negocio, priorizando continuidad, reducción de riesgos y generación de valor.",
+    desc: "Enfoque consultivo orientado a resultados de negocio.",
   },
   {
     num: "05",
     title: "Capacidad integral",
-    desc: "Diseñamos, implementamos, administramos y soportamos soluciones tecnológicas de misión crítica durante todo su ciclo de vida.",
+    desc: "Capacidad para diseñar, implementar, administrar y soportar soluciones tecnológicas de misión crítica.",
   },
   {
     num: "06",
     title: "Compromiso a largo plazo",
-    desc: "Acompañamos la operación, mejora y evolución de las soluciones implementadas para fortalecer la continuidad operativa.",
+    desc: "Compromiso con la continuidad operativa y la generación de valor a largo plazo.",
   },
 ];
 
@@ -47,12 +48,27 @@ const WhyRow = ({ reason, delay }: { reason: (typeof reasons)[0]; delay: number 
       onMouseLeave={() => setHovered(false)}
       className="border-b"
       style={{
-        borderColor: "rgba(255,255,255,0.07)",
+        borderColor: hovered ? "rgba(247,176,23,0.45)" : "rgba(255,255,255,0.07)",
         backgroundColor: hovered ? "rgba(247,176,23,0.03)" : "transparent",
-        transition: "background-color 0.2s ease",
+        transition: "background-color 0.2s ease, border-color 0.2s ease",
         padding: "28px 0",
+        position: "relative",
+        overflow: "hidden",
       }}
     >
+      {/* Glow sweep */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          left: 0, top: 0, bottom: 0,
+          width: hovered ? "340px" : "0px",
+          background: "linear-gradient(to right, rgba(247,176,23,0.07) 0%, transparent 100%)",
+          transition: "width 0.4s ease",
+          pointerEvents: "none",
+        }}
+      />
+
       {/*
         Mobile:  2 cols [40px | flex col: title + desc]
         Desktop: 3 cols [56px | title | desc] via lg:contents on wrapper
@@ -60,68 +76,107 @@ const WhyRow = ({ reason, delay }: { reason: (typeof reasons)[0]; delay: number 
       <div className="grid grid-cols-[40px_1fr] lg:grid-cols-[56px_1fr_1.8fr] gap-x-6 lg:gap-x-10 items-start">
 
         {/* Column 1 — number */}
-        <span
+        <motion.span
+          animate={{
+            fontSize: hovered ? "18px" : "11px",
+            color: hovered ? "#ffffff" : "#F7B017",
+          }}
+          transition={{ duration: 0.25, ease: "easeOut" }}
           style={{
             fontFamily: "'JetBrains Mono', monospace",
-            fontSize: "11px",
             letterSpacing: "0.2em",
-            color: hovered ? "#f0f0f0" : "#F7B017",
             paddingTop: "2px",
-            transition: "color 0.2s ease",
             display: "block",
+            textShadow: hovered ? "0 0 12px rgba(247,176,23,0.85)" : "none",
           }}
         >
           {reason.num}
-        </span>
+        </motion.span>
 
         {/* Mobile wrapper: title + desc stacked. On lg becomes transparent (contents) */}
         <div className="lg:contents">
 
           {/* Column 2 — title */}
-          <span
+          <motion.span
+            animate={{
+              x: hovered ? 6 : 0,
+              color: hovered ? "#ffffff" : "#f0f0f0",
+            }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
             style={{
               fontFamily: "'Barlow Condensed', sans-serif",
               fontWeight: 600,
               fontSize: "clamp(1.05rem, 1.6vw, 1.25rem)",
               letterSpacing: "-0.005em",
-              color: hovered ? "#F7B017" : "#f0f0f0",
               lineHeight: 1.2,
               display: "block",
-              transition: "color 0.2s ease",
             }}
           >
             {reason.title}
-          </span>
+          </motion.span>
 
           {/* Description — mobile only (inside the 2-col wrapper) */}
-          <p
+          <motion.p
             className="lg:hidden"
-            style={{
-              fontSize: "13.5px",
-              color: "#606474",
-              lineHeight: 1.7,
-              margin: "10px 0 0",
+            animate={{
+              filter: hovered ? "blur(0px)" : "blur(3px)",
+              opacity: hovered ? 1 : 0.35,
+              color: hovered ? "#c8ccd8" : "#606474",
             }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            style={{ fontSize: "13.5px", lineHeight: 1.7, margin: "10px 0 0" }}
           >
             {reason.desc}
-          </p>
+          </motion.p>
         </div>
 
         {/* Column 3 — description, desktop only */}
-        <p
+        <motion.p
           className="hidden lg:block"
-          style={{ fontSize: "13.5px", color: "#606474", lineHeight: 1.7, margin: 0 }}
+          animate={{
+            filter: hovered ? "blur(0px)" : "blur(3px)",
+            opacity: hovered ? 1 : 0.35,
+            color: hovered ? "#c8ccd8" : "#606474",
+          }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
+          style={{ fontSize: "13.5px", lineHeight: 1.7, margin: 0 }}
         >
           {reason.desc}
-        </p>
+        </motion.p>
       </div>
     </motion.div>
   );
 };
 
 const WhyYomtalSection = () => (
-  <section className="relative z-10 bg-[#13151f]/90 backdrop-blur-sm section-padding">
-    <div className="container mx-auto px-6">
+  <section
+    id="por-que"
+    className="relative z-10 section-padding"
+    style={{
+      // TODO: optimize — currently 2.6 MB JPEG renamed as .png, recommend converting to WebP (~200–400 KB)
+      backgroundImage: "url('/Section-3.png')",
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      backgroundRepeat: "no-repeat",
+    }}
+  >
+    {/* Dark overlay — maintains text legibility over the background image */}
+    <div
+      aria-hidden="true"
+      style={{
+        position: "absolute",
+        inset: 0,
+        backgroundColor: "rgba(19,21,31,0.72)",
+        pointerEvents: "none",
+      }}
+    />
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: false, margin: "-10%" }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+    >
+    <div className="container mx-auto px-6" style={{ position: "relative", zIndex: 1 }}>
       <motion.div
         initial={{ opacity: 0, y: 32 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -146,7 +201,7 @@ const WhyYomtalSection = () => (
 
         <p
           className="mt-4 max-w-3xl text-sm md:text-base"
-          style={{ color: "#606474", lineHeight: 1.85 }}
+          style={{ color: "#8a9099", lineHeight: 1.85 }}
         >
           Combinamos experiencia, especialización técnica y enfoque consultivo para ayudar a las organizaciones a
           reducir riesgos, fortalecer su infraestructura y mantener la continuidad de sus operaciones críticas.
@@ -164,6 +219,10 @@ const WhyYomtalSection = () => (
           <WhyRow key={reason.num} reason={reason} delay={i * 0.07} />
         ))}
       </div>
+    </div>
+    </motion.div>
+    <div className="next-section-wrap" style={{ position: "absolute", bottom: 0, left: 0, right: 0, zIndex: 2 }}>
+      <SectionGate refId="004" label="Socios" targetId="socios" />
     </div>
   </section>
 );

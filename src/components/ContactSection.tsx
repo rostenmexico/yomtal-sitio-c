@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState, useRef, useEffect } from "react";
+import { motion, useInView } from "framer-motion";
 
 interface FormData {
   nombre: string;
@@ -15,7 +15,6 @@ interface FormErrors {
   mensaje?: string;
 }
 
-// Shared input base style — border-radius 2px, dark bg, low-opacity border
 const INPUT_BASE: React.CSSProperties = {
   borderRadius: "2px",
   border: "1px solid rgba(255,255,255,0.1)",
@@ -46,11 +45,79 @@ const LABEL_MAP: Record<string, string> = {
   mensaje: "Mensaje",
 };
 
+const TypewriterText = ({
+  text,
+  delay = 0,
+  className = "",
+  style = {},
+}: {
+  text: string;
+  delay?: number;
+  className?: string;
+  style?: React.CSSProperties;
+}) => {
+  const [displayed, setDisplayed] = useState("");
+  const [started, setStarted] = useState(false);
+  const ref = useRef<HTMLParagraphElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setStarted(true);
+        } else {
+          setStarted(false);
+          setDisplayed("");
+        }
+      },
+      { threshold: 0.3 }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!started) return;
+    let i = 0;
+    const timer = setTimeout(() => {
+      const interval = setInterval(() => {
+        setDisplayed(text.slice(0, i + 1));
+        i++;
+        if (i >= text.length) clearInterval(interval);
+      }, 38);
+      return () => clearInterval(interval);
+    }, delay * 1000);
+    return () => clearTimeout(timer);
+  }, [started, text, delay]);
+
+  return (
+    <p ref={ref} className={className} style={style}>
+      {displayed}
+      {displayed.length < text.length && started && (
+        <span
+          style={{
+            display: "inline-block",
+            width: "2px",
+            height: "1em",
+            backgroundColor: "#F7B017",
+            marginLeft: "2px",
+            animation: "noc-pulse 0.7s ease-in-out infinite",
+            verticalAlign: "text-bottom",
+          }}
+        />
+      )}
+    </p>
+  );
+};
+
 const ContactSection = () => {
   const [form, setForm] = useState<FormData>({ nombre: "", correo: "", empresa: "", mensaje: "" });
   const [errors, setErrors] = useState<FormErrors>({});
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const ctaRef = useRef<HTMLDivElement>(null);
+  const ctaInView = useInView(ctaRef, { once: false, margin: "-15%" });
 
   const validate = (): boolean => {
     const e: FormErrors = {};
@@ -66,7 +133,6 @@ const ContactSection = () => {
     e.preventDefault();
     if (!validate()) return;
     setLoading(true);
-    // Simulate send (EmailJS can be integrated here)
     await new Promise((r) => setTimeout(r, 1500));
     setLoading(false);
     setSent(true);
@@ -86,12 +152,105 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contacto" className="relative z-10 bg-[#13151f]/90 backdrop-blur-sm section-padding">
-      <div className="container mx-auto px-6">
+    <section
+      id="contacto"
+      className="relative z-10 overflow-hidden section-padding bg-[#13151f]/90 backdrop-blur-sm"
+    >
+      {/* Ambient glow */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 pointer-events-none"
+        style={{ background: "radial-gradient(circle at center, rgba(247,176,23,0.06) 0%, transparent 65%)" }}
+      />
+
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false, margin: "-10%" }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+      >
+      <div className="container mx-auto px-6 relative z-10">
+
+        {/* ── CTA block ── */}
+        <div ref={ctaRef} className="text-center">
+
+          {/* Step 1: Label — parpadeo eléctrico */}
+          <motion.p
+            className="terminal-label mb-6"
+            initial={{ opacity: 0 }}
+            animate={ctaInView ? {
+              opacity: [0, 0.8, 0.2, 1, 0.4, 1],
+              textShadow: [
+                "0 0 0px rgba(247,176,23,0)",
+                "0 0 18px rgba(247,176,23,0.9)",
+                "0 0 6px rgba(247,176,23,0.5)",
+              ],
+            } : { opacity: 0 }}
+            transition={{ duration: 2.0, ease: "easeOut" }}
+          >
+            // siguiente paso
+          </motion.p>
+
+          {/* Step 2: Titular emerge desde el fondo oscuro */}
+          <motion.h2
+            className="mt-0 leading-tight"
+            style={{
+              fontFamily: "'Space Grotesk', sans-serif",
+              fontWeight: 300,
+              fontSize: "clamp(2rem, 5vw, 3.2rem)",
+              letterSpacing: "-0.03em",
+              color: "#f0f0f0",
+            }}
+            initial={{ opacity: 0, scale: 0.92, filter: "brightness(0.1)" }}
+            animate={ctaInView
+              ? { opacity: 1, scale: 1, filter: "brightness(1)" }
+              : { opacity: 0, scale: 0.92, filter: "brightness(0.1)" }
+            }
+            transition={{ delay: 1.4, duration: 1.6, ease: "easeOut" }}
+          >
+            Fortalezcamos juntos la seguridad y continuidad de tu operación
+          </motion.h2>
+
+          {/* Step 3: Descripción — typewriter */}
+          <TypewriterText
+            text="Ya sea que busques optimizar tu infraestructura, fortalecer tu estrategia de ciberseguridad, cumplir requerimientos regulatorios o incorporar capacidades especializadas, nuestro equipo puede ayudarte a identificar oportunidades de mejora alineadas a los objetivos de tu negocio."
+            delay={3.0}
+            style={{ fontSize: "16px", color: "#a8acb8", lineHeight: 1.85, maxWidth: "640px", margin: "20px auto 0" }}
+          />
+
+          {/* Step 4: Botones se iluminan */}
+          <motion.div
+            className="mt-10 flex flex-wrap justify-center gap-4"
+            initial={{ opacity: 0, y: 16 }}
+            animate={ctaInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+            transition={{ delay: 5.5, duration: 0.6, ease: "easeOut" }}
+          >
+            <a
+              href="https://wa.me/523336485683?text=Hola%2C%20quiero%20hablar%20con%20un%20especialista%20de%20YOMTAL."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="sharp-btn-primary"
+              style={{ animation: "btn-pulse-attention 2s ease-in-out 6.2s 3" }}
+            >
+              Hablar con un especialista
+            </a>
+            <a href="#contacto" className="sharp-btn-ghost">
+              Solicitar contacto
+            </a>
+          </motion.div>
+        </div>
+
+        {/* Separator */}
+        <hr
+          aria-hidden="true"
+          style={{ border: "none", borderTop: "1px solid rgba(255,255,255,0.08)", margin: "72px 0 64px" }}
+        />
+
+        {/* ── Form block ── */}
         <motion.div
           initial={{ opacity: 0, y: 32 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           transition={{ duration: 0.6 }}
           className="text-center mb-14"
         >
@@ -108,11 +267,6 @@ const ContactSection = () => {
           >
             Solicita asesoría especializada
           </h2>
-          <p className="mt-4 max-w-3xl mx-auto" style={{ fontSize: "15px", color: "#606474", lineHeight: 1.85 }}>
-            Ya sea que busques optimizar tu infraestructura, fortalecer tu estrategia de ciberseguridad, cumplir
-            requerimientos regulatorios o incorporar capacidades especializadas, nuestro equipo puede ayudarte a
-            identificar oportunidades de mejora alineadas a los objetivos de tu negocio.
-          </p>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 max-w-5xl mx-auto">
@@ -120,7 +274,7 @@ const ContactSection = () => {
           <motion.div
             initial={{ opacity: 0, y: 32 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
             transition={{ duration: 0.6 }}
           >
             {sent ? (
@@ -151,10 +305,7 @@ const ContactSection = () => {
               <form onSubmit={handleSubmit} className="space-y-5">
                 {(["nombre", "correo", "empresa", "mensaje"] as const).map((field) => (
                   <div key={field}>
-                    {/* JetBrains Mono label */}
-                    <label style={LABEL_STYLE}>
-                      {LABEL_MAP[field]}
-                    </label>
+                    <label style={LABEL_STYLE}>{LABEL_MAP[field]}</label>
 
                     {field === "mensaje" ? (
                       <textarea
@@ -193,7 +344,6 @@ const ContactSection = () => {
                   </div>
                 ))}
 
-                {/* Submit: sharp rectangle */}
                 <button
                   type="submit"
                   disabled={loading}
@@ -210,7 +360,7 @@ const ContactSection = () => {
           <motion.div
             initial={{ opacity: 0, y: 32 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
             transition={{ delay: 0.2, duration: 0.6 }}
             className="flex flex-col justify-center space-y-8"
           >
@@ -224,9 +374,12 @@ const ContactSection = () => {
                 ),
                 label: "Email",
                 content: (
-                  <a href="mailto:info@yomtal.mx" style={{ fontSize: "14px", fontWeight: 500, color: "#e0e0e0", textDecoration: "none", transition: "color 0.2s" }}
+                  <a
+                    href="mailto:info@yomtal.mx"
+                    style={{ fontSize: "14px", fontWeight: 500, color: "#e0e0e0", textDecoration: "none", transition: "color 0.2s" }}
                     onMouseEnter={(e) => (e.currentTarget.style.color = "#F7B017")}
-                    onMouseLeave={(e) => (e.currentTarget.style.color = "#e0e0e0")}>
+                    onMouseLeave={(e) => (e.currentTarget.style.color = "#e0e0e0")}
+                  >
                     info@yomtal.mx
                   </a>
                 ),
@@ -239,10 +392,14 @@ const ContactSection = () => {
                 ),
                 label: "Teléfono",
                 content: (
-                  <a href="https://wa.me/523336485683?text=Hola%2C%20quiero%20hablar%20con%20un%20especialista%20de%20YOMTAL." target="_blank" rel="noopener noreferrer"
+                  <a
+                    href="https://wa.me/523336485683?text=Hola%2C%20quiero%20hablar%20con%20un%20especialista%20de%20YOMTAL."
+                    target="_blank"
+                    rel="noopener noreferrer"
                     style={{ fontSize: "14px", fontWeight: 500, color: "#e0e0e0", textDecoration: "none", transition: "color 0.2s" }}
                     onMouseEnter={(e) => (e.currentTarget.style.color = "#F7B017")}
-                    onMouseLeave={(e) => (e.currentTarget.style.color = "#e0e0e0")}>
+                    onMouseLeave={(e) => (e.currentTarget.style.color = "#e0e0e0")}
+                  >
                     33 3648 5683
                   </a>
                 ),
@@ -298,6 +455,7 @@ const ContactSection = () => {
           </motion.div>
         </div>
       </div>
+      </motion.div>
     </section>
   );
 };

@@ -1,5 +1,14 @@
 import { useRef, useEffect, useCallback } from "react";
 
+// Radar center offset relative to the hero shield panel (#hero-radar-anchor).
+// 0.0 = left/top edge of panel, 1.0 = right/bottom edge.
+// Adjust these two numbers to fine-tune where the sweep originates within the shield image.
+const RADAR_OFFSET_X = 0.5;  // horizontal: center of panel
+const RADAR_OFFSET_Y = 0.55; // vertical: slightly below center where the shield visual sits
+
+// Sections that dim the radar while visible — add a section's id here to extend the effect.
+const DIMMED_SECTION_IDS = ["nosotros", "servicios", "por-que", "mision", "socios"];
+
 interface Hex {
   x: number;
   y: number;
@@ -17,6 +26,7 @@ const NetworkCanvas = () => {
   const scanAngleRef = useRef<number>(0);
   const timeRef = useRef<number>(0);
   const mouseRef = useRef({ x: -999, y: -999 });
+  const anchorRef = useRef<HTMLElement | null>(null);
 
   const HEX_SIZE = window.innerWidth < 768 ? 52 : 36;
 
@@ -65,6 +75,43 @@ const NetworkCanvas = () => {
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
+
+    anchorRef.current = document.getElementById("hero-radar-anchor");
+
+    // Dim the radar while any section in DIMMED_SECTION_IDS is visible.
+    // Uses a Set to track which sections are currently intersecting — handles
+    // the overlap zone where two adjacent sections are both partially visible.
+    // All siblings share the same React commit so getElementById is reliable here;
+    // the rAF retry is a guard for any unexpected edge case.
+    let radarObserver: IntersectionObserver | null = null;
+    let observerRafId: number | null = null;
+
+    const setupRadarObserver = () => {
+      radarObserver?.disconnect();
+      const intersecting = new Set<string>();
+      radarObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            e.isIntersecting
+              ? intersecting.add(e.target.id)
+              : intersecting.delete(e.target.id);
+          });
+          canvas.style.opacity = intersecting.size > 0 ? "0.35" : "1";
+        },
+        { threshold: 0 },
+      );
+      let found = 0;
+      DIMMED_SECTION_IDS.forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) { radarObserver!.observe(el); found++; }
+      });
+      return found > 0;
+    };
+
+    if (!setupRadarObserver()) {
+      // Guard: no targets found yet — retry after one animation frame
+      observerRafId = requestAnimationFrame(setupRadarObserver);
+    }
 
     const resize = () => {
       const isMobile = window.innerWidth < 768;
@@ -143,13 +190,22 @@ const NetworkCanvas = () => {
 
       const W = window.innerWidth;
       const H = window.innerHeight;
-      const cx = W / 2;
-      const cy = H / 2;
+
+      // Anchor radar center to the hero shield panel. getBoundingClientRect()
+      // returns viewport-relative coords each frame, so the center follows scroll automatically.
+      const rect = anchorRef.current?.getBoundingClientRect();
+      // Mobile fallback: panel is display:none (rect.width === 0), so default to
+      // horizontal center and 40vh — a reasonable hero focal point on small screens.
+      const cx = (rect && rect.width > 0)
+        ? rect.left + rect.width  * RADAR_OFFSET_X
+        : W / 2;
+      const cy = (rect && rect.width > 0)
+        ? rect.top  + rect.height * RADAR_OFFSET_Y
+        : H * 0.4;
       const time = timeRef.current;
       const scanAngle = scanAngleRef.current;
 
-      ctx.fillStyle = "#080a10";
-      ctx.fillRect(0, 0, W, H);
+      ctx.clearRect(0, 0, W, H);
 
       // Radar sweep
       ctx.save();
@@ -168,7 +224,7 @@ const NetworkCanvas = () => {
       ctx.beginPath();
       ctx.moveTo(0, 0);
       ctx.lineTo(Math.cos(scanAngle) * Math.max(W, H), Math.sin(scanAngle) * Math.max(W, H));
-      ctx.strokeStyle = "rgba(247,176,23,0.55)";
+      ctx.strokeStyle = "rgba(247,176,23,0.20)";
       ctx.lineWidth = 1.2;
       ctx.stroke();
       ctx.restore();
@@ -283,6 +339,8 @@ const NetworkCanvas = () => {
 
     return () => {
       cancelAnimationFrame(animRef.current);
+      if (observerRafId !== null) cancelAnimationFrame(observerRafId);
+      radarObserver?.disconnect();
       clearTimeout(resizeTimer);
       window.removeEventListener("resize", debouncedResize);
       window.removeEventListener("mousemove", handleMouse);
@@ -299,8 +357,10 @@ const NetworkCanvas = () => {
         left: 0,
         width: "100%",
         height: "100%",
-        zIndex: 0,
-        pointerEvents: "all",
+        zIndex: 20,
+        pointerEvents: "none",
+        mixBlendMode: "screen",
+        transition: "opacity 0.6s ease",
       }}
     />
   );

@@ -1,24 +1,38 @@
 import { motion } from "framer-motion";
+import SectionGate from "@/components/SectionGate";
 
 const partners = ["Check Point", "Cisco", "A10", "Exabeam / LogRhythm", "Picus", "DigiCert", "NordPass / NordStellar"];
 
 const PartnersSection = () => (
-  <section id="socios" className="relative z-10 bg-[#0f1117]/95 backdrop-blur-sm section-padding overflow-hidden">
-    <img
-      src="/bg-partners.png"
-      alt=""
+  <section
+    id="socios"
+    className="relative z-10 section-padding overflow-hidden"
+    style={{
+      // TODO: optimize — currently 1.9 MB JPEG renamed as .png, recommend converting to WebP (~200–400 KB)
+      // Replaces former <img src="/bg-partners.png"> (file kept in public/ for cleanup pass)
+      backgroundImage: "url('/Section-5.png')",
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      backgroundRepeat: "no-repeat",
+    }}
+  >
+    {/* Dark overlay — maintains text legibility over the background image */}
+    <div
       aria-hidden="true"
       style={{
         position: "absolute",
         inset: 0,
-        width: "100%",
-        height: "100%",
-        objectFit: "cover",
-        opacity: 0.07,
+        backgroundColor: "rgba(15,17,23,0.72)",
         pointerEvents: "none",
       }}
     />
-    <div className="container mx-auto px-6 text-center">
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: false, margin: "-10%" }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+    >
+    <div className="container mx-auto px-6 text-center" style={{ position: "relative", zIndex: 1 }}>
       <motion.div
         initial={{ opacity: 0, y: 32 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -66,6 +80,10 @@ const PartnersSection = () => (
           </motion.div>
         ))}
       </div>
+    </div>
+    </motion.div>
+    <div className="next-section-wrap" style={{ position: "absolute", bottom: 0, left: 0, right: 0, zIndex: 2 }}>
+      <SectionGate refId="006" label="Contáctanos" targetId="contacto" />
     </div>
   </section>
 );

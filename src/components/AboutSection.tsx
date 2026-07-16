@@ -1,11 +1,14 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
+import SectionGate from "@/components/SectionGate";
 
 const benefits = [
-  "Reducimos riesgos operativos y de ciberseguridad.",
-  "Garantizamos la continuidad de servicios y operaciones críticas.",
-  "Optimizamos costos de infraestructura, soporte y seguridad.",
-  "Alineamos las soluciones tecnológicas a los objetivos del negocio.",
-  "Acompañamos a nuestros clientes desde la evaluación inicial hasta la operación continua.",
+  "Reducir riesgos operativos y de ciberseguridad.",
+  "Garantizar la continuidad de servicios y operaciones críticas.",
+  "Optimizar costos de infraestructura, soporte y seguridad.",
+  "Cumplir requerimientos regulatorios y mejores prácticas internacionales.",
+  "Incrementar la productividad mediante tecnologías alineadas a los objetivos del negocio.",
+  "Acceder a especialistas certificados sin incrementar la complejidad operativa interna.",
 ];
 
 const statusRows = [
@@ -64,9 +67,9 @@ const NocStatusPanel = () => (
       <span
         style={{
           fontFamily: "'JetBrains Mono', monospace",
-          fontSize: "10px",
+          fontSize: "12px",
           letterSpacing: "0.15em",
-          color: "rgba(247,176,23,0.6)",
+          color: "rgba(247,176,23,0.85)",
           textTransform: "uppercase",
         }}
       >
@@ -75,8 +78,8 @@ const NocStatusPanel = () => (
       <span
         style={{
           fontFamily: "'JetBrains Mono', monospace",
-          fontSize: "9px",
-          color: "rgba(255,255,255,0.18)",
+          fontSize: "11px",
+          color: "rgba(255,255,255,0.45)",
           letterSpacing: "0.08em",
         }}
       >
@@ -106,8 +109,8 @@ const NocStatusPanel = () => (
           <span
             style={{
               fontFamily: "'JetBrains Mono', monospace",
-              fontSize: "9px",
-              color: "rgba(247,176,23,0.32)",
+              fontSize: "11px",
+              color: "rgba(247,176,23,0.60)",
               letterSpacing: "0.08em",
               flexShrink: 0,
               width: "46px",
@@ -120,8 +123,8 @@ const NocStatusPanel = () => (
           <span
             style={{
               fontFamily: "'JetBrains Mono', monospace",
-              fontSize: "12px",
-              color: "#8a9099",
+              fontSize: "13px",
+              color: "#b0b4c0",
               flex: 1,
               letterSpacing: "0.01em",
             }}
@@ -147,9 +150,9 @@ const NocStatusPanel = () => (
             <span
               style={{
                 fontFamily: "'JetBrains Mono', monospace",
-                fontSize: "9px",
+                fontSize: "11px",
                 letterSpacing: "0.12em",
-                color: "rgba(247,176,23,0.65)",
+                color: "rgba(247,176,23,0.85)",
                 textTransform: "uppercase",
               }}
             >
@@ -179,8 +182,8 @@ const NocStatusPanel = () => (
         <span
           style={{
             fontFamily: "'JetBrains Mono', monospace",
-            fontSize: "9px",
-            color: "rgba(255,255,255,0.2)",
+            fontSize: "11px",
+            color: "rgba(255,255,255,0.50)",
             letterSpacing: "0.1em",
             textTransform: "uppercase",
           }}
@@ -190,8 +193,8 @@ const NocStatusPanel = () => (
         <span
           style={{
             fontFamily: "'JetBrains Mono', monospace",
-            fontSize: "9px",
-            color: "rgba(247,176,23,0.45)",
+            fontSize: "11px",
+            color: "rgba(247,176,23,0.70)",
             letterSpacing: "0.08em",
           }}
         >
@@ -232,9 +235,9 @@ const NocStatusPanel = () => (
         <span
           style={{
             fontFamily: "'JetBrains Mono', monospace",
-            fontSize: "10px",
+            fontSize: "12px",
             letterSpacing: "0.12em",
-            color: "rgba(247,176,23,0.55)",
+            color: "rgba(247,176,23,0.75)",
             textTransform: "uppercase",
           }}
         >
@@ -243,8 +246,8 @@ const NocStatusPanel = () => (
         <span
           style={{
             fontFamily: "'JetBrains Mono', monospace",
-            fontSize: "10px",
-            color: "rgba(247,176,23,0.38)",
+            fontSize: "12px",
+            color: "rgba(247,176,23,0.65)",
             letterSpacing: "0.05em",
           }}
         >
@@ -255,12 +258,173 @@ const NocStatusPanel = () => (
   </motion.div>
 );
 
+const misionVisionPanels = [
+  {
+    label: "MISIÓN",
+    text: "Crear soluciones de valor para nuestros clientes mediante la combinación de gente, procesos y herramientas de TI que fortalezcan la seguridad, continuidad operativa y logro de sus objetivos de negocio.",
+    from: -40,
+  },
+  {
+    label: "VISIÓN",
+    text: "Ser un referente y consultor de confianza para nuestros clientes, constituyéndonos como un integrador especializado en soluciones de infraestructura tecnológica, ciberseguridad y continuidad operativa.",
+    from: 40,
+  },
+];
+
+const MisionVisionPanel = ({
+  panel,
+  index,
+}: {
+  panel: (typeof misionVisionPanels)[0];
+  index: number;
+}) => {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: panel.from }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ duration: 0.7, ease: "easeOut" }}
+      whileHover={{ y: -8 }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className="relative p-10 md:p-14"
+      style={{
+        borderLeft: index === 1 ? "1px solid rgba(255,255,255,0.07)" : "none",
+        borderTop: hovered ? "1px solid rgba(247,176,23,0.35)" : "1px solid transparent",
+        backgroundColor: hovered ? "rgba(247,176,23,0.04)" : "transparent",
+        transition: "background-color 0.35s ease, border-color 0.35s ease",
+        cursor: "default",
+      }}
+    >
+      {/* Comilla decorativa */}
+      <span
+        className="absolute top-6 left-8 text-[80px] font-bold leading-none select-none"
+        style={{
+          color: hovered ? "rgba(247,176,23,0.50)" : "rgba(247,176,23,0.15)",
+          transition: "color 0.35s ease",
+        }}
+      >
+        "
+      </span>
+
+      {/* Label MISIÓN / VISIÓN */}
+      <span
+        className="overline relative z-10"
+        style={{
+          display: "block",
+          filter: hovered
+            ? "drop-shadow(0 0 8px rgba(247,176,23,0.55))"
+            : "none",
+          transition: "filter 0.35s ease",
+        }}
+      >
+        {panel.label}
+      </span>
+
+      {/* Texto del panel */}
+      <motion.p
+        className="mt-6 relative z-10"
+        animate={{
+          color: hovered ? "#f0f2f8" : "#a0a4b2",
+          scale: hovered ? 1.025 : 1,
+        }}
+        transition={{ duration: 0.3, ease: "easeOut" }}
+        style={{
+          fontSize: "1rem",
+          lineHeight: 1.9,
+          transformOrigin: "top left",
+        }}
+      >
+        {panel.text}
+      </motion.p>
+    </motion.div>
+  );
+};
+
+const BenefitItem = ({ text, delay }: { text: string; delay: number }) => {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: -20 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay, duration: 0.5 }}
+      whileHover={{ y: -5, transition: { duration: 0.25, ease: "easeOut" } }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className="flex items-start gap-3"
+      style={{
+        borderLeft: hovered ? "2px solid rgba(247,176,23,0.6)" : "2px solid transparent",
+        backgroundColor: hovered ? "rgba(247,176,23,0.04)" : "transparent",
+        paddingLeft: "8px",
+        paddingRight: "8px",
+        paddingTop: "4px",
+        paddingBottom: "4px",
+        marginLeft: "-10px",
+        borderRadius: "1px",
+        transition: "border-color 0.25s ease, background-color 0.25s ease",
+        cursor: "default",
+      }}
+    >
+      <span
+        style={{
+          fontFamily: "'JetBrains Mono', monospace",
+          color: hovered ? "#ffffff" : "#F7B017",
+          fontSize: "14px",
+          lineHeight: 1.5,
+          flexShrink: 0,
+          userSelect: "none",
+          transition: "color 0.25s ease",
+        }}
+      >
+        {hovered ? "›" : "—"}
+      </span>
+      <span
+        style={{
+          color: hovered ? "#ffffff" : "#dcdde2",
+          fontSize: "16px",
+          lineHeight: 1.6,
+          transition: "color 0.25s ease",
+        }}
+      >
+        {text}
+      </span>
+    </motion.div>
+  );
+};
+
 const AboutSection = () => (
   <section
     id="nosotros"
-    className="relative z-10 bg-[#13151f]/90 backdrop-blur-sm section-padding"
+    className="relative z-10 section-padding"
+    style={{
+      // TODO: optimize — currently 2 MB JPEG renamed as .png, recommend converting to WebP (~200–400 KB)
+      backgroundImage: "url('/2nd-Section.png')",
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      backgroundRepeat: "no-repeat",
+    }}
   >
-    <div className="container mx-auto px-6">
+    {/* Dark overlay — keeps text legible over the background image */}
+    <div
+      aria-hidden="true"
+      style={{
+        position: "absolute",
+        inset: 0,
+        backgroundColor: "rgba(19,21,31,0.58)",
+        pointerEvents: "none",
+      }}
+    />
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: false, margin: "-10%" }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+    >
+    <div className="container mx-auto px-6" style={{ position: "relative", zIndex: 1 }}>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
         {/* Left: text content — copy and structure unchanged */}
@@ -283,40 +447,15 @@ const AboutSection = () => (
           >
             Reducimos riesgos y fortalecemos la continuidad operativa de tu organización
           </h2>
-          <p className="mt-6" style={{ color: "#606474", lineHeight: 1.85 }}>
-            En YOMTAL ayudamos a las organizaciones a reducir riesgos y garantizar la
-            continuidad operativa mediante infraestructura tecnológica y ciberseguridad
-            especializada alineadas a sus objetivos de negocio. Fundada en 2012, YOMTAL
-            está conformada por especialistas con más de dos décadas de experiencia en
-            ciberseguridad, infraestructura de redes y protección de entornos corporativos
-            críticos.
+          <p className="mt-6" style={{ color: "#a0a4b2", lineHeight: 1.85 }}>
+            En YOMTAL ayudamos a las organizaciones a reducir riesgos y garantizar la continuidad operativa, mediante infraestructura tecnológica y ciberseguridad especializada alineadas a sus objetivos de negocio.
+          </p>
+          <p className="mt-4" style={{ color: "#a0a4b2", lineHeight: 1.85 }}>
+            Fundada en 2012, YOMTAL conformada por especialistas con más de dos décadas de experiencia en ciberseguridad, infraestructura de redes y protección de entornos corporativos críticos. Esta trayectoria nos permite diseñar e implementar soluciones efectivas para entornos complejos, ayudando a nuestros clientes a reducir riesgos, fortalecer la continuidad operativa y tomar decisiones tecnológicas con mayor confianza.
           </p>
           <div className="mt-8 space-y-4">
             {benefits.map((b, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.3 + i * 0.15, duration: 0.5 }}
-                className="flex items-start gap-3"
-              >
-                <span
-                  style={{
-                    fontFamily: "'JetBrains Mono', monospace",
-                    color: "#F7B017",
-                    fontSize: "14px",
-                    lineHeight: 1.5,
-                    flexShrink: 0,
-                    userSelect: "none",
-                  }}
-                >
-                  —
-                </span>
-                <span style={{ color: "#d4d4d8", fontSize: "15px", lineHeight: 1.6 }}>
-                  {b}
-                </span>
-              </motion.div>
+              <BenefitItem key={i} text={b} delay={0.3 + i * 0.15} />
             ))}
           </div>
         </motion.div>
@@ -324,6 +463,21 @@ const AboutSection = () => (
         {/* Right: NOC Status Panel */}
         <NocStatusPanel />
       </div>
+
+      {/* Misión y Visión — subsección integrada */}
+      <hr
+        aria-hidden="true"
+        style={{ border: "none", borderTop: "1px solid rgba(255,255,255,0.08)", margin: "64px 0 56px" }}
+      />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
+        {misionVisionPanels.map((panel, i) => (
+          <MisionVisionPanel key={i} panel={panel} index={i} />
+        ))}
+      </div>
+    </div>
+    </motion.div>
+    <div className="next-section-wrap" style={{ position: "absolute", bottom: 0, left: 0, right: 0, zIndex: 2 }}>
+      <SectionGate refId="002" label="Servicios" targetId="servicios" />
     </div>
   </section>
 );

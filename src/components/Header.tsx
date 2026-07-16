@@ -11,7 +11,7 @@ const navItems = [
 
 const NAV_LINK_STYLE: React.CSSProperties = {
   fontFamily: "'JetBrains Mono', monospace",
-  fontSize: "12px",
+  fontSize: "14px",
   letterSpacing: "0.08em",
   textTransform: "uppercase",
   display: "flex",
@@ -62,11 +62,7 @@ const Header = () => {
               src="/logo-yomtal.png"
               alt="YOMTAL"
               className="w-auto object-contain"
-              style={{
-                height: "52px",
-                maxWidth: "200px",
-                mixBlendMode: "screen",
-              }}
+              style={{ height: "68px", maxWidth: "240px" }}
             />
           </a>
 
@@ -80,13 +76,13 @@ const Header = () => {
                   href={item.href}
                   style={{
                     ...NAV_LINK_STYLE,
-                    color: isActive ? "#F7B017" : "#9ca3af",
+                    color: isActive ? "#F7B017" : "#c0c4d0",
                   }}
                   onMouseEnter={(e) => {
                     if (!isActive) (e.currentTarget as HTMLElement).style.color = "#f0f0f0";
                   }}
                   onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLElement).style.color = isActive ? "#F7B017" : "#9ca3af";
+                    (e.currentTarget as HTMLElement).style.color = isActive ? "#F7B017" : "#c0c4d0";
                   }}
                 >
                   {/* Active indicator: small orange square */}
@@ -113,7 +109,7 @@ const Header = () => {
               href="#contacto"
               style={{
                 fontFamily: "'JetBrains Mono', monospace",
-                fontSize: "11px",
+                fontSize: "13px",
                 letterSpacing: "0.08em",
                 textTransform: "uppercase",
                 color: "#F7B017",

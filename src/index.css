@@ -74,6 +74,7 @@
 
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 80px;
     font-family: "Barlow", sans-serif;
   }
 
@@ -199,16 +200,16 @@
   /* ── Terminal / mono label ────────────────────────────────────────────────── */
   .terminal-label {
     font-family: "JetBrains Mono", monospace;
-    font-size: 10px;
+    font-size: 12px;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: rgba(247, 176, 23, 0.6);
+    color: rgba(247, 176, 23, 0.85);
   }
 
   /* ── Overline (section eyebrow) ───────────────────────────────────────────── */
   .overline {
     font-family: "JetBrains Mono", monospace;
-    font-size: 10px;
+    font-size: 12px;
     letter-spacing: 0.15em;
     font-weight: 400;
     color: hsl(var(--yomtal-orange));
@@ -220,7 +221,7 @@
   }
 
   .text-body-light {
-    color: #606474;
+    color: #9095a8;
   }
 }
 
@@ -228,6 +229,9 @@
   section {
     position: relative;
     z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   .bg-white {
@@ -254,22 +258,6 @@
   }
 }
 
-@keyframes gradient-shift {
-  0%,
-  100% {
-    transform: scale(1);
-    opacity: 0.08;
-  }
-  50% {
-    transform: scale(1.15);
-    opacity: 0.12;
-  }
-}
-
-.animate-gradient-shift {
-  animation: gradient-shift 8s ease-in-out infinite;
-}
-
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -280,23 +268,48 @@
   }
 }
 
-@keyframes spin-slow {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* === Hero panel — living shadows === */
+.hero-shadow-amber {
+  position: absolute;
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(247,176,23,0.30) 0%, transparent 68%);
+  mix-blend-mode: screen;
+  pointer-events: none;
+  top: 8%;
+  left: 15%;
+  animation: shadow-drift-amber 9s ease-in-out infinite;
 }
 
-.animate-spin-slow {
-  animation: spin-slow 32s linear infinite;
+.hero-shadow-cyan {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(100,210,230,0.16) 0%, transparent 68%);
+  mix-blend-mode: screen;
+  pointer-events: none;
+  bottom: 12%;
+  right: 8%;
+  animation: shadow-drift-cyan 13s ease-in-out infinite;
 }
 
-/* Logo ring sweep — synced to NetworkCanvas radar: 0.003 rad/frame × 60fps → 34.9s/rev */
-@keyframes logo-radar-spin {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
+@keyframes shadow-drift-amber {
+  0%, 100% { transform: translate(0, 0) scale(1);         opacity: 0.75; }
+  33%       { transform: translate(18%, -22%) scale(1.15); opacity: 0.95; }
+  66%       { transform: translate(-15%, 18%) scale(0.88); opacity: 0.5;  }
+}
+
+@keyframes shadow-drift-cyan {
+  0%, 100% { transform: translate(0, 0) scale(1);          opacity: 0.5;  }
+  40%       { transform: translate(-20%, -15%) scale(1.22); opacity: 0.75; }
+  80%       { transform: translate(15%, 20%) scale(0.85);   opacity: 0.32; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-shadow-amber,
+  .hero-shadow-cyan { animation: none; }
 }
 
 /* NOC Status Panel — scan line top → bottom */
@@ -310,3 +323,10 @@
   0%, 100% { opacity: 1;   box-shadow: 0 0 0px rgba(247,176,23,0); }
   50%       { opacity: 0.4; box-shadow: 0 0 5px rgba(247,176,23,0.45); }
 }
+
+/* CTA primary button — attention pulse after appearing */
+@keyframes btn-pulse-attention {
+  0%, 100% { box-shadow: 0 0 0px rgba(247,176,23,0); }
+  50%       { box-shadow: 0 0 24px rgba(247,176,23,0.6); }
+}
+
